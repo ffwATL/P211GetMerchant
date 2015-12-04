@@ -1,10 +1,10 @@
 package com.bionic.edu;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Named
 public class Application{
@@ -15,7 +15,7 @@ public class Application{
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
-        application.printMerchantName(1);
+        application.printMerchantName(2);
      }
     
     public void printMerchantName(int id){
