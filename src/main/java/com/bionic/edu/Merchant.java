@@ -88,4 +88,9 @@ public class Merchant {
 		this.lastSent = lastSent;
 	}
 
+	@Override
+	public String toString(){
+		return getName();
+	}
+
 }
