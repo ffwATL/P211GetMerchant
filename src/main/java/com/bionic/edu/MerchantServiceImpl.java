@@ -1,5 +1,7 @@
 package com.bionic.edu;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -18,5 +20,16 @@ public class MerchantServiceImpl implements MerchantService{
 	public List<Merchant> getAllMerchant() {
 		return merchantDao.getAllMerchant();
 	}
+
+	@Override
+	@Transactional
+	public void addMerchant(Merchant m) {
+		merchantDao.addMerchant(m);
+	}
+
+    @Transactional
+    public void removeMerchant(int id){
+        merchantDao.removeMerchant(id);
+    }
 
 }

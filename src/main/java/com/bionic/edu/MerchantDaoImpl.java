@@ -1,6 +1,7 @@
 package com.bionic.edu;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,9 +28,24 @@ public class MerchantDaoImpl implements MerchantDao{
 	}
 
 	@Override
+	@Transactional
+	public void addMerchant(Merchant m){
+		em.persist(m);
+		em.flush();
+	}
+
+	@Override
+	@Transactional
+	public void removeMerchant(int id) {
+		Merchant m = em.find(Merchant.class, id);
+		em.merge(m);
+		em.remove(m);
+		em.flush();
+	}
+
+	@Override
 	public Merchant findById(int id){
 		return em.find(Merchant.class, id);
 	}
-	
 
 }
