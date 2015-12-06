@@ -1,5 +1,7 @@
 package com.bionic.edu;
 
+import com.bionic.edu.customer.Customer;
+import com.bionic.edu.customer.CustomerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -12,13 +14,17 @@ import javax.inject.Named;
 public class Application{
     @Inject
     MerchantService merchantService;
+    @Inject
+    CustomerService customerService;
+
     Logger logger = LogManager.getLogger();
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
+        application.findCustomer(2);
         /*application.printMerchantName(2);*/
-        application.showAll();
+        /*application.showAll();*/
         /*application.removeMerchantById(6);*/
         /*application.addMerchant(application.generateMerchant());*/
      }
@@ -26,6 +32,11 @@ public class Application{
     private void removeMerchantById(int id){
         merchantService.removeMerchant(id);
         showAll();
+    }
+
+    private void findCustomer(int id){
+        Customer c = customerService.findById(id);
+        logger.trace(c.getName());
     }
     private Merchant generateMerchant(){
         Merchant m = new Merchant();
