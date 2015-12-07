@@ -23,7 +23,12 @@ public class Application{
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
         /*application.removeCustomerById(6);*/
-        application.removeMerchantById(107);
+        /*application.addMerchant();*/
+        application.updateAccountMerchant(108,"new Account");
+    }
+
+    private void updateAccountMerchant(int id, String newAcc){
+        merchantService.updateAccount(id, newAcc);
     }
 
     private void showAllCustomer(){
