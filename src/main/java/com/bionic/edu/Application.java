@@ -22,19 +22,20 @@ public class Application{
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
-        application.findCustomer(2);
-        /*int id = application.addMerchant();
-        logger.trace(id);*/
-        int id = application.addCustomer();
-        logger.trace(id);
-        /*application.removeMerchantById(105);*/
-        /*logger.trace(application.showAll());*/
+        /*application.removeCustomerById(6);*/
+        application.showAllCustomer();
+    }
 
+    private void showAllCustomer(){
+        logger.trace(customerService.getAllCustomer());
+    }
+
+    private void removeCustomerById(int id){
+        customerService.remove(id);
     }
 
     private void removeMerchantById(int id){
         merchantService.removeMerchant(id);
-        showAll();
     }
 
     private void findCustomer(int id){
@@ -51,7 +52,6 @@ public class Application{
         c.setEmail("mike@gmail.com");
         customerService.save(c);
         return c.getId();
-
     }
     public int addMerchant(){
         Merchant merchant = new Merchant();
@@ -67,7 +67,7 @@ public class Application{
     }
 
 
-    private void showAll(){
+    private void showAllMerchant(){
         logger.trace(merchantService.getAllMerchant());
     }
 
