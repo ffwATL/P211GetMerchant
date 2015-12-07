@@ -1,5 +1,6 @@
 package com.bionic.edu;
 
+import com.bionic.edu.result.Result;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -35,6 +36,11 @@ public class MerchantServiceImpl implements MerchantService{
 	@Override
 	public void updateAccount(int id, String newAcc) {
 		merchantDao.updateAccount(id, newAcc);
+	}
+
+	@Override
+	public List<Result> getTotalReport() {
+		return merchantDao.getTotalReport();
 	}
 
 }

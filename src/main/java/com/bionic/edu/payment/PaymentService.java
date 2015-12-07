@@ -7,4 +7,7 @@ public interface PaymentService {
 
     public List<Payment> findByMerchantId(int id);
 
+    public Payment findById(int id);
+
+
 }

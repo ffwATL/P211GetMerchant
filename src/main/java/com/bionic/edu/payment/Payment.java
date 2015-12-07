@@ -1,10 +1,9 @@
 package com.bionic.edu.payment;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.bionic.edu.Merchant;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -17,7 +16,11 @@ public class Payment {
     private String goods;
     private java.sql.Timestamp dt;
     private int customerId;
-    private int merchantId;
+    /*private int merchantId;*/
+
+    @ManyToOne
+    @JoinColumn(name = "merchantId")
+    private Merchant merchant;
 
     public int getId() {
         return id;
@@ -67,11 +70,11 @@ public class Payment {
         this.customerId = customerId;
     }
 
-    public int getMerchantId() {
-        return merchantId;
+    public Merchant getMerchant() {
+        return merchant;
     }
 
-    public void setMerchantId(int merchantId) {
-        this.merchantId = merchantId;
+    public void setMerchant(Merchant value) {
+        merchant = value;
     }
 }

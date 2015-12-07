@@ -4,6 +4,7 @@ import com.bionic.edu.customer.Customer;
 import com.bionic.edu.customer.CustomerService;
 import com.bionic.edu.payment.Payment;
 import com.bionic.edu.payment.PaymentService;
+import com.bionic.edu.result.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -31,9 +32,23 @@ public class Application{
         /*application.removeCustomerById(6);*/
         /*application.addMerchant();*/
         /*application.findPaymentById(2);*/
-        application.getCustomersWithLargePays(500.0);
+        application.findPayment(2);
 
     }
+
+    public void findPayment(int id){
+        Payment p = paymentService.findById(2);
+        SimpleDateFormat fmt = new 	SimpleDateFormat("dd.MM.yyyy HH:mm");
+        System.out.println("Date = " + fmt.format(p.getDt()) + "   	merchant = " + p.getMerchant().getName() + "   sum 	= " + p.getSumPayed());
+    }
+
+
+    public void getTotalReport() {
+        List<Result> list = merchantService.getTotalReport();
+        for(Result r: list)
+            System.out.format("%1$25s  %2$8.2f %n", r.getName(), r.getSum());
+    }
+
 
     public void getCustomersWithLargePays(double limit){
         List<String> list = customerService.getNames(limit);
@@ -41,7 +56,7 @@ public class Application{
             System.out.println(s);
     }
 
-    private void findPaymentById(int id){
+   /* private void findPaymentById(int id){
         List<Payment> list = paymentService.findByMerchantId(id);
         System.out.println("        date        merchant   sum  ");
         for(Payment p: list){
@@ -52,7 +67,7 @@ public class Application{
                     txDate, p.getMerchantId(), p.getSumPayed());
         }
 
-    }
+    }*/
 
     private void updateAccountMerchant(int id, String newAcc){
         merchantService.updateAccount(id, newAcc);

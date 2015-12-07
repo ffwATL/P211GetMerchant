@@ -1,5 +1,6 @@
 package com.bionic.edu;
 
+import com.bionic.edu.result.Result;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,5 +19,8 @@ public interface MerchantDao {
 
 	@Transactional
 	public void updateAccount(int id, String newAcc);
+
+	public List<Result> getTotalReport();
+
 
 }

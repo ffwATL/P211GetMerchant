@@ -20,4 +20,8 @@ public class PaymentDaoImpl implements PaymentDao{
         return query.getResultList();
     }
 
+    public Payment findById(int id){
+        return em.find(Payment.class, id);
+    }
+
 }

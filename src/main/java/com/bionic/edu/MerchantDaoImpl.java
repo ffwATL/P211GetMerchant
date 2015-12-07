@@ -1,5 +1,6 @@
 package com.bionic.edu;
 
+import com.bionic.edu.result.Result;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,14 @@ public class MerchantDaoImpl implements MerchantDao{
 		if(m != null){
 			m.setAccount(newAcc);
 		}
+	}
+
+	@Override
+	public List<Result> getTotalReport() {
+		String txt = "SELECT new com.bionic.edu.result.Result (m.name, SUM(p.chargePayed))";
+		txt += "FROM Payment p, Merchant m WHERE m.id = p.merchantId GROUP BY m.name";
+		TypedQuery<Result> query = em.createQuery(txt, Result.class);
+		return query.getResultList();
 	}
 
 	@Override

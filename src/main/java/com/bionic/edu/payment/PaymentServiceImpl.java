@@ -14,4 +14,9 @@ public class PaymentServiceImpl implements PaymentService{
     public List<Payment> findByMerchantId(int id) {
         return paymentDao.findByMerchantId(id);
     }
+
+    @Override
+    public Payment findById(int id) {
+        return paymentDao.findById(id);
+    }
 }
