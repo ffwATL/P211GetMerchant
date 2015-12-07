@@ -38,9 +38,9 @@ public class MerchantDaoImpl implements MerchantDao{
 	@Transactional
 	public void removeMerchant(int id) {
 		Merchant m = em.find(Merchant.class, id);
-		em.merge(m);
-		em.remove(m);
-		em.flush();
+		if(m != null){
+			em.remove(m);
+		}
 	}
 
 	@Override

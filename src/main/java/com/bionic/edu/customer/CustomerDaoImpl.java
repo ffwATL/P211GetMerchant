@@ -43,8 +43,8 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void remove(int id) {
         Customer c = findById(id);
-        em.merge(c);
-        em.remove(c);
-        em.flush();
+        if(c != null){
+            em.remove(c);
+        }
     }
 }
