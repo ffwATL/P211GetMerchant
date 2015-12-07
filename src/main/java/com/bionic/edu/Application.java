@@ -30,7 +30,15 @@ public class Application{
         Application application = (Application)context.getBean("application");
         /*application.removeCustomerById(6);*/
         /*application.addMerchant();*/
-        application.findPaymentById(2);
+        /*application.findPaymentById(2);*/
+        application.getCustomersWithLargePays(500.0);
+
+    }
+
+    public void getCustomersWithLargePays(double limit){
+        List<String> list = customerService.getNames(limit);
+        for(String s: list)
+            System.out.println(s);
     }
 
     private void findPaymentById(int id){

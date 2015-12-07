@@ -34,4 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void remove(int id) {
         customerDao.remove(id);
     }
+
+    @Override
+    public List<String> getNames(double sumPayed) {
+        return customerDao.getNames(sumPayed);
+    }
 }
