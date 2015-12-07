@@ -18,7 +18,7 @@ public class Merchant {
     private double minSum;
     private double needToSend;
     private double sent;
-    private java.sql.Date lastSent;    
+    private java.sql.Date lastSent;
     public Merchant(){}
     
 	public int getId() {

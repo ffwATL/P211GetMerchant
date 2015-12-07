@@ -23,7 +23,9 @@ public class Application{
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
         application.findCustomer(2);
-        int id = application.addMerchant();
+        /*int id = application.addMerchant();
+        logger.trace(id);*/
+        int id = application.addCustomer();
         logger.trace(id);
         /*application.removeMerchantById(105);*/
         /*logger.trace(application.showAll());*/
@@ -40,6 +42,17 @@ public class Application{
         logger.trace(c.getName());
     }
 
+    public int addCustomer(){
+        Customer c = new Customer();
+        c.setName("Mike");
+        c.setAddress("something bla bla bla");
+        c.setCcno("ccno");
+        c.setCctype("cctype");
+        c.setEmail("mike@gmail.com");
+        customerService.addCustomer(c);
+        return c.getId();
+
+    }
     public int addMerchant(){
         Merchant merchant = new Merchant();
         merchant.setAccount("555555555");
