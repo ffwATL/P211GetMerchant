@@ -16,4 +16,7 @@ public interface MerchantService {
     @Transactional
     public void removeMerchant(int id);
 
+    @Transactional
+    public void updateAccount(int id, String newAcc);
+
 }

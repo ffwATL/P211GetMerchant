@@ -44,6 +44,14 @@ public class MerchantDaoImpl implements MerchantDao{
 	}
 
 	@Override
+	public void updateAccount(int id, String newAcc) {
+		Merchant m = em.find(Merchant.class, id);
+		if(m != null){
+			m.setAccount(newAcc);
+		}
+	}
+
+	@Override
 	public Merchant findById(int id){
 		return em.find(Merchant.class, id);
 	}

@@ -32,4 +32,9 @@ public class MerchantServiceImpl implements MerchantService{
         merchantDao.removeMerchant(id);
     }
 
+	@Override
+	public void updateAccount(int id, String newAcc) {
+		merchantDao.updateAccount(id, newAcc);
+	}
+
 }
