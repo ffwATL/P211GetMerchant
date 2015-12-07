@@ -24,7 +24,7 @@ public class Application{
         Application application = (Application)context.getBean("application");
         /*application.removeCustomerById(6);*/
         /*application.addMerchant();*/
-        application.updateAccountMerchant(108,"new Account");
+        application.showAllMerchant();
     }
 
     private void updateAccountMerchant(int id, String newAcc){
@@ -73,7 +73,9 @@ public class Application{
 
 
     private void showAllMerchant(){
-        logger.trace(merchantService.getAllMerchant());
+        for(Merchant m: merchantService.getAllMerchant()){
+            System.out.format("%1$25s     %2$4.1f  %n",m.getName(), m.getCharge());
+        }
     }
 
     private void addMerchant(Merchant m){
