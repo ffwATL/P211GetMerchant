@@ -15,8 +15,9 @@ public class PaymentDaoImpl implements PaymentDao{
 
     @Override
     public List<Payment> findByMerchantId(int id){
-        /*TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchantId ="+ id, Payment.class);
+       /* TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchantId ="+ id, Payment.class);
         return query.getResultList();*/
+
         return null;
     }
 
