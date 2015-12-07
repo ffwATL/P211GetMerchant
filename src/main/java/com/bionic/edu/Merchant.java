@@ -90,7 +90,7 @@ public class Merchant {
 
 	@Override
 	public String toString(){
-		return getName();
+		return "" +getId();
 	}
 
 }

@@ -17,17 +17,18 @@ public class Application{
     @Inject
     CustomerService customerService;
 
-    Logger logger = LogManager.getLogger();
+    static Logger logger = LogManager.getLogger();
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
         application.findCustomer(2);
-        /*application.printMerchantName(2);*/
-        /*application.showAll();*/
-        /*application.removeMerchantById(6);*/
-        /*application.addMerchant(application.generateMerchant());*/
-     }
+        int id = application.addMerchant();
+        logger.trace(id);
+        /*application.removeMerchantById(105);*/
+        /*logger.trace(application.showAll());*/
+
+    }
 
     private void removeMerchantById(int id){
         merchantService.removeMerchant(id);
@@ -38,24 +39,27 @@ public class Application{
         Customer c = customerService.findById(id);
         logger.trace(c.getName());
     }
-    private Merchant generateMerchant(){
-        Merchant m = new Merchant();
-        m.setAccount("123456");
-        m.setBankName("privatbank");
-        m.setCharge(3.2);
-        m.setName("testing");
-        m.setSwift("qwr124SWiFT");
-        m.setPeriod((short)1);
-        m.setId(5);
-        return m;
+
+    public int addMerchant(){
+        Merchant merchant = new Merchant();
+        merchant.setAccount("555555555");
+        merchant.setBankName("Erste Bank");
+        merchant.setCharge(1.2);
+        merchant.setMinSum(145.0);
+        merchant.setName("N&M");
+        merchant.setPeriod((short) 1);
+        merchant.setSwift("X85T44wwq");
+        merchantService.save(merchant);
+        return merchant.getId();
     }
+
 
     private void showAll(){
         logger.trace(merchantService.getAllMerchant());
     }
 
     private void addMerchant(Merchant m){
-        merchantService.addMerchant(m);
+        merchantService.save(m);
         logger.info(merchantService.getAllMerchant());
     }
 

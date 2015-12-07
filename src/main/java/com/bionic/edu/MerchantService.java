@@ -11,7 +11,7 @@ public interface MerchantService {
 	public List<Merchant> getAllMerchant();
 
     @Transactional
-    public void addMerchant(Merchant m);
+    public void save(Merchant m);
 
     @Transactional
     public void removeMerchant(int id);

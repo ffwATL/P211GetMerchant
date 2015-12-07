@@ -23,8 +23,8 @@ public class MerchantServiceImpl implements MerchantService{
 
 	@Override
 	@Transactional
-	public void addMerchant(Merchant m) {
-		merchantDao.addMerchant(m);
+	public void save(Merchant m) {
+		merchantDao.save(m);
 	}
 
     @Transactional

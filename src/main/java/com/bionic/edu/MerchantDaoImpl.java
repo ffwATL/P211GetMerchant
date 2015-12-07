@@ -29,7 +29,7 @@ public class MerchantDaoImpl implements MerchantDao{
 
 	@Override
 	@Transactional
-	public void addMerchant(Merchant m){
+	public void save(Merchant m){
 		em.persist(m);
 		em.flush();
 	}
