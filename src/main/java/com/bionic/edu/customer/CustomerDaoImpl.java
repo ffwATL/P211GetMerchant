@@ -51,9 +51,10 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public List<String> getNames(double sumPayed) {
         String txt = "SELECT DISTINCT c.name FROM ";
-        txt += "Payment p, Customer c " ;
+        txt += "Payment p, Customer c ";
         txt += "WHERE c.id = p.customerId AND p.sumPayed >:sumPayed";
         TypedQuery<String> query = em.createQuery(txt, String.class);
+        query.setParameter("sumPayed",sumPayed);
         return query.getResultList();
     }
 }
