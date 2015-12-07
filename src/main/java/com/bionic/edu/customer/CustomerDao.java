@@ -12,9 +12,9 @@ public interface CustomerDao {
     public List<Customer> getAllCustomer();
 
     @Transactional
-    public void addCustomer(Customer c);
+    public void save(Customer c);
 
     @Transactional
-    public void removeCustomer(int id);
+    public void remove(int id);
 
 }

@@ -34,14 +34,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Transactional
     @Override
-    public void addCustomer(Customer c) {
+    public void save(Customer c) {
         em.persist(c);
         em.flush();
     }
 
     @Transactional
     @Override
-    public void removeCustomer(int id) {
+    public void remove(int id) {
         Customer c = findById(id);
         em.merge(c);
         em.remove(c);

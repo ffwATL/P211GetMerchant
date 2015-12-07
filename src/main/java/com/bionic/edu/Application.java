@@ -49,7 +49,7 @@ public class Application{
         c.setCcno("ccno");
         c.setCctype("cctype");
         c.setEmail("mike@gmail.com");
-        customerService.addCustomer(c);
+        customerService.save(c);
         return c.getId();
 
     }
