@@ -2,6 +2,8 @@ package com.bionic.edu;
 
 import com.bionic.edu.customer.Customer;
 import com.bionic.edu.customer.CustomerService;
+import com.bionic.edu.payment.Payment;
+import com.bionic.edu.payment.PaymentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Named
 public class Application{
@@ -16,6 +20,8 @@ public class Application{
     MerchantService merchantService;
     @Inject
     CustomerService customerService;
+    @Inject
+    PaymentService paymentService;
 
     static Logger logger = LogManager.getLogger();
     @SuppressWarnings("resource")
@@ -24,7 +30,20 @@ public class Application{
         Application application = (Application)context.getBean("application");
         /*application.removeCustomerById(6);*/
         /*application.addMerchant();*/
-        application.showAllMerchant();
+        application.findPaymentById(2);
+    }
+
+    private void findPaymentById(int id){
+        List<Payment> list = paymentService.findByMerchantId(id);
+        System.out.println("        date        merchant   sum  ");
+        for(Payment p: list){
+            SimpleDateFormat dtFrm = new
+                    SimpleDateFormat("dd.MM.yyyy HH:mm");
+            String txDate = dtFrm.format(p.getDt());
+            System.out.format("  %1s   %2$3d     %3$6.2f   %n",
+                    txDate, p.getMerchantId(), p.getSumPayed());
+        }
+
     }
 
     private void updateAccountMerchant(int id, String newAcc){
