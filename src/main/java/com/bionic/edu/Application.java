@@ -23,7 +23,7 @@ public class Application{
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Application application = (Application)context.getBean("application");
         /*application.removeCustomerById(6);*/
-        application.showAllCustomer();
+        application.removeMerchantById(107);
     }
 
     private void showAllCustomer(){
