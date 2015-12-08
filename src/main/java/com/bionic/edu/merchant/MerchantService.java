@@ -1,4 +1,4 @@
-package com.bionic.edu;
+package com.bionic.edu.merchant;
 
 import com.bionic.edu.result.Result;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,13 +9,13 @@ public interface MerchantService {
 	
 	public Merchant findById(int id);
 
-	public List<Merchant> getAllMerchant();
+	public List<Merchant> findAll();
 
     @Transactional
     public void save(Merchant m);
 
     @Transactional
-    public void removeMerchant(int id);
+    public void remove(int id);
 
     @Transactional
     public void updateAccount(int id, String newAcc);

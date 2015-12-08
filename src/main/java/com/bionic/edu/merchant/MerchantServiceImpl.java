@@ -1,4 +1,4 @@
-package com.bionic.edu;
+package com.bionic.edu.merchant;
 
 import com.bionic.edu.result.Result;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +18,8 @@ public class MerchantServiceImpl implements MerchantService{
 	}
 
 	@Override
-	public List<Merchant> getAllMerchant() {
-		return merchantDao.getAllMerchant();
+	public List<Merchant> findAll() {
+		return merchantDao.findAll();
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class MerchantServiceImpl implements MerchantService{
 	}
 
     @Transactional
-    public void removeMerchant(int id){
-        merchantDao.removeMerchant(id);
+    public void remove(int id){
+        merchantDao.remove(id);
     }
 
 	@Override

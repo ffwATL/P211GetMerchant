@@ -1,4 +1,4 @@
-package com.bionic.edu;
+package com.bionic.edu.merchant;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;

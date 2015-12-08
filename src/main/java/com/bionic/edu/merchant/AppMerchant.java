@@ -1,4 +1,4 @@
-package com.bionic.edu;
+package com.bionic.edu.merchant;
 
 import com.bionic.edu.customer.Customer;
 import com.bionic.edu.customer.CustomerService;
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Named
-public class Application{
+public class AppMerchant {
     @Inject
     MerchantService merchantService;
     @Inject
@@ -28,11 +28,11 @@ public class Application{
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
-        Application application = (Application)context.getBean("application");
+        AppMerchant app = (AppMerchant)context.getBean("appMerchant");
         /*application.removeCustomerById(6);*/
         /*application.addMerchant();*/
-        /*application.findPaymentById(2);*/
-        application.findPayment(2);
+        app.findPayment(2);
+        /*appMerchant.getTotalReport();*/
 
     }
 
@@ -82,7 +82,7 @@ public class Application{
     }
 
     private void removeMerchantById(int id){
-        merchantService.removeMerchant(id);
+        merchantService.remove(id);
     }
 
     private void findCustomer(int id){
@@ -115,14 +115,14 @@ public class Application{
 
 
     private void showAllMerchant(){
-        for(Merchant m: merchantService.getAllMerchant()){
+        for(Merchant m: merchantService.findAll()){
             System.out.format("%1$25s     %2$4.1f  %n",m.getName(), m.getCharge());
         }
     }
 
     private void addMerchant(Merchant m){
         merchantService.save(m);
-        logger.info(merchantService.getAllMerchant());
+        logger.info(merchantService.findAll());
     }
 
     public void printMerchantName(int id){

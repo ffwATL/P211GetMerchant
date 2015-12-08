@@ -1,7 +1,7 @@
 package com.bionic.edu.payment;
 
 
-import com.bionic.edu.Merchant;
+import com.bionic.edu.merchant.Merchant;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
