@@ -20,7 +20,7 @@ public class AppMerchant {
     @Inject
     PaymentService paymentService;
 
-    static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger();
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
@@ -31,11 +31,11 @@ public class AppMerchant {
     private void findAll(){
         List<Merchant> list = merchantService.findAll();
         String f = "";
-        logger.trace(String.format("id %-1s Name %-21s Bank Name %-6s Account %-4s Charge %s Min sum", f, f, f, f, f));
-        logger.trace("----------------------------------------------------------------------------");
+        logger.trace(String.format("%-4s | %-26s | %-16s | %-12s | %-6s | %s |", "Id", "Name", "Bank Name", "Account", "Charge","Min sum"));
+        logger.trace("-----------------------------------------------------------------------------------------");
         for(Merchant m: list){
-            logger.trace(String.format("%-4d %-26s %-16s %-12s %-7.3f %.2f", m.getId(), m.getName(), m.getBankName(), m.getAccount(),
-                    m.getCharge(), m.getMinSum()));
+            logger.trace(String.format("%-4d | %-26s | %-16s | %-12s | %-6.3f | %.2f |", m.getId(), m.getName(), m.getBankName(),
+                    m.getAccount(), m.getCharge(), m.getMinSum()));
         }
     }
 

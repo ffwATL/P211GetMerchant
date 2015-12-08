@@ -31,7 +31,6 @@ public class MerchantDaoImpl implements MerchantDao{
 	@Transactional
 	public void save(Merchant m){
 		em.persist(m);
-		em.flush();
 	}
 
 	@Override

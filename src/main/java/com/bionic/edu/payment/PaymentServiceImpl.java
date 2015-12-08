@@ -1,6 +1,8 @@
 package com.bionic.edu.payment;
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -11,12 +13,18 @@ public class PaymentServiceImpl implements PaymentService{
     PaymentDao paymentDao;
 
     @Override
-    public List<Payment> findByMerchantId(int id) {
-        return paymentDao.findByMerchantId(id);
+    public List<Payment> findAll() {
+        return paymentDao.findAll();
     }
 
     @Override
     public Payment findById(int id) {
         return paymentDao.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void save(Payment p) {
+        paymentDao.save(p);
     }
 }

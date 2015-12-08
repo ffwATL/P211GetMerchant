@@ -77,4 +77,7 @@ public class Payment {
     public void setMerchant(Merchant value) {
         merchant = value;
     }
+    public int getMerchantId(){
+        return merchant.getId();
+    }
 }

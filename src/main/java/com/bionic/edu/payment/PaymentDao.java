@@ -5,9 +5,10 @@ import java.util.List;
 
 public interface PaymentDao {
 
-    public List<Payment> findByMerchantId(int id);
+    public List<Payment> findAll();
 
     public Payment findById(int id);
 
+    public void save(Payment p);
 
 }
