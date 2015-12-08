@@ -1,10 +1,7 @@
 package com.bionic.edu.merchant;
 
-import com.bionic.edu.customer.Customer;
 import com.bionic.edu.customer.CustomerService;
-import com.bionic.edu.payment.Payment;
 import com.bionic.edu.payment.PaymentService;
-import com.bionic.edu.result.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Named
@@ -29,104 +25,19 @@ public class AppMerchant {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppMerchant app = (AppMerchant)context.getBean("appMerchant");
-        /*application.removeCustomerById(6);*/
-        /*application.addMerchant();*/
-        app.findPayment(2);
-        /*appMerchant.getTotalReport();*/
-
+        app.findAll();
     }
 
-    public void findPayment(int id){
-        Payment p = paymentService.findById(2);
-        SimpleDateFormat fmt = new 	SimpleDateFormat("dd.MM.yyyy HH:mm");
-        System.out.println("Date = " + fmt.format(p.getDt()) + "   	merchant = " + p.getMerchant().getName() + "   sum 	= " + p.getSumPayed());
-    }
-
-
-    public void getTotalReport() {
-        List<Result> list = merchantService.getTotalReport();
-        for(Result r: list)
-            System.out.format("%1$25s  %2$8.2f %n", r.getName(), r.getSum());
-    }
-
-
-    public void getCustomersWithLargePays(double limit){
-        List<String> list = customerService.getNames(limit);
-        for(String s: list)
-            System.out.println(s);
-    }
-
-   /* private void findPaymentById(int id){
-        List<Payment> list = paymentService.findByMerchantId(id);
-        System.out.println("        date        merchant   sum  ");
-        for(Payment p: list){
-            SimpleDateFormat dtFrm = new
-                    SimpleDateFormat("dd.MM.yyyy HH:mm");
-            String txDate = dtFrm.format(p.getDt());
-            System.out.format("  %1s   %2$3d     %3$6.2f   %n",
-                    txDate, p.getMerchantId(), p.getSumPayed());
-        }
-
-    }*/
-
-    private void updateAccountMerchant(int id, String newAcc){
-        merchantService.updateAccount(id, newAcc);
-    }
-
-    private void showAllCustomer(){
-        logger.trace(customerService.getAllCustomer());
-    }
-
-    private void removeCustomerById(int id){
-        customerService.remove(id);
-    }
-
-    private void removeMerchantById(int id){
-        merchantService.remove(id);
-    }
-
-    private void findCustomer(int id){
-        Customer c = customerService.findById(id);
-        logger.trace(c.getName());
-    }
-
-    public int addCustomer(){
-        Customer c = new Customer();
-        c.setName("Mike");
-        c.setAddress("something bla bla bla");
-        c.setCcno("ccno");
-        c.setCctype("cctype");
-        c.setEmail("mike@gmail.com");
-        customerService.save(c);
-        return c.getId();
-    }
-    public int addMerchant(){
-        Merchant merchant = new Merchant();
-        merchant.setAccount("555555555");
-        merchant.setBankName("Erste Bank");
-        merchant.setCharge(1.2);
-        merchant.setMinSum(145.0);
-        merchant.setName("N&M");
-        merchant.setPeriod((short) 1);
-        merchant.setSwift("X85T44wwq");
-        merchantService.save(merchant);
-        return merchant.getId();
-    }
-
-
-    private void showAllMerchant(){
-        for(Merchant m: merchantService.findAll()){
-            System.out.format("%1$25s     %2$4.1f  %n",m.getName(), m.getCharge());
+    private void findAll(){
+        List<Merchant> list = merchantService.findAll();
+        String f = "";
+        logger.trace(String.format("id %-1s Name %-21s Bank Name %-6s Account %-4s Charge %s Min sum", f, f, f, f, f));
+        logger.trace("----------------------------------------------------------------------------");
+        for(Merchant m: list){
+            logger.trace(String.format("%-4d %-26s %-16s %-12s %-7.3f %.2f", m.getId(), m.getName(), m.getBankName(), m.getAccount(),
+                    m.getCharge(), m.getMinSum()));
         }
     }
 
-    private void addMerchant(Merchant m){
-        merchantService.save(m);
-        logger.info(merchantService.findAll());
-    }
 
-    public void printMerchantName(int id){
-        Merchant m1 = merchantService.findById(id);
-        System.out.println("name = " + m1.getName());     
-    } 
 }
