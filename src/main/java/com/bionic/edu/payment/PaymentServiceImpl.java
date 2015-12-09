@@ -27,4 +27,9 @@ public class PaymentServiceImpl implements PaymentService{
     public void save(Payment p) {
         paymentDao.save(p);
     }
+
+    @Override
+    public double getPaymentSum() {
+        return paymentDao.getPaymentSum();
+    }
 }

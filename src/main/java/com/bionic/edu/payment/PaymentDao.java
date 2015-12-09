@@ -11,4 +11,6 @@ public interface PaymentDao {
 
     public void save(Payment p);
 
+    public double getPaymentSum();
+
 }

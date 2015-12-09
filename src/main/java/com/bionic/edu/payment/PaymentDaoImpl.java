@@ -34,6 +34,12 @@ public class PaymentDaoImpl implements PaymentDao{
         } else logger.warn("Wrong customer Id given: " + p.getCustomerId());
     }
 
+    @Override
+    public double getPaymentSum() {
+        TypedQuery<Double> query = em.createQuery("SELECT SUM(p.sumPayed) FROM Payment p", Double.class);
+        return query.getSingleResult();
+    }
+
     public Payment findById(int id){
         return em.find(Payment.class, id);
     }

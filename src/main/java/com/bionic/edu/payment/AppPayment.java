@@ -26,7 +26,14 @@ public class AppPayment {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppPayment app = (AppPayment) context.getBean("appPayment");
         app.save(32, 2, "tester", 999.0, 9.0);
+        app.getPaymentSum();
         /*app.findAll();*/
+    }
+
+    private Double getPaymentSum(){
+        Double d = paymentService.getPaymentSum();
+        logger.trace("Payment sum: " + d);
+        return d;
     }
 
     private void findAll(){
@@ -43,8 +50,6 @@ public class AppPayment {
 
     private void save(int merchantId, int customerId, String goods, double sumPayed, double chargePayed){
         Payment p = new Payment();
-        /*Merchant m = merchantService.findById(merchantId);
-        if(m != null);*/
         p.setDt(new Timestamp(System.currentTimeMillis()));
         p.setChargePayed(chargePayed);
         p.setCustomerId(customerId);
@@ -53,6 +58,5 @@ public class AppPayment {
         p.setMerchant(merchantService.findById(merchantId));
         paymentService.save(p);
     }
-
 
 }

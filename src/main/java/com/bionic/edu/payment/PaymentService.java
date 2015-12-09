@@ -11,5 +11,7 @@ public interface PaymentService {
 
     public void save(Payment p);
 
+    public double getPaymentSum();
+
 
 }
