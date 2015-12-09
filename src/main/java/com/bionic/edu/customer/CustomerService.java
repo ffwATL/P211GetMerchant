@@ -9,7 +9,7 @@ public interface CustomerService {
 
     public Customer findById(int id);
 
-    public List<Customer> getAllCustomer();
+    public List<Customer> findAll();
 
     @Transactional
     public void save(Customer c);

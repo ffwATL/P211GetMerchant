@@ -25,8 +25,8 @@ public class AppPayment {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppPayment app = (AppPayment) context.getBean("appPayment");
-        /*app.save(2, 2,"Sziget 7 day pass ticket",235.0,10.0);*/
-        app.findAll();
+        app.save(32, 2, "tester", 999.0, 9.0);
+        /*app.findAll();*/
     }
 
     private void findAll(){
@@ -43,6 +43,8 @@ public class AppPayment {
 
     private void save(int merchantId, int customerId, String goods, double sumPayed, double chargePayed){
         Payment p = new Payment();
+        /*Merchant m = merchantService.findById(merchantId);
+        if(m != null);*/
         p.setDt(new Timestamp(System.currentTimeMillis()));
         p.setChargePayed(chargePayed);
         p.setCustomerId(customerId);

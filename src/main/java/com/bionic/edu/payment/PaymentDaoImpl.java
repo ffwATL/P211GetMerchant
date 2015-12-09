@@ -1,6 +1,9 @@
 package com.bionic.edu.payment;
 
 
+import com.bionic.edu.customer.Customer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,7 @@ public class PaymentDaoImpl implements PaymentDao{
 
     @PersistenceContext
     private EntityManager em;
+    private static Logger logger = LogManager.getLogger();
 
     @Override
         public List<Payment> findAll(){
@@ -24,7 +28,10 @@ public class PaymentDaoImpl implements PaymentDao{
     @Transactional
     @Override
     public void save(Payment p){
-        em.persist(p);
+        if(em.find(Customer.class, p.getCustomerId()) != null){
+            if(em.find(Customer.class, p.getMerchantId())!= null) em.persist(p);
+            else logger.warn("wrong merchant Id given: " + p.getMerchantId());
+        } else logger.warn("Wrong customer Id given: " + p.getCustomerId());
     }
 
     public Payment findById(int id){

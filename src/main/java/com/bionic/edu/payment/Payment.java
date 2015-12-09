@@ -78,6 +78,6 @@ public class Payment {
         merchant = value;
     }
     public int getMerchantId(){
-        return merchant.getId();
+        return merchant != null ? merchant.getId() : 0;
     }
 }
