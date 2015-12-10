@@ -2,6 +2,7 @@ package com.bionic.edu.merchant;
 
 import com.bionic.edu.customer.CustomerService;
 import com.bionic.edu.payment.PaymentService;
+import com.bionic.edu.result.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +26,7 @@ public class AppMerchant {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppMerchant app = (AppMerchant)context.getBean("appMerchant");
-        app.findAll();
+        app.getTotalReport();
     }
 
     private void findAll(){
@@ -39,5 +40,13 @@ public class AppMerchant {
         }
     }
 
+    private void getTotalReport(){
+        List<Result> list = merchantService.getTotalReport();
+        logger.trace(String.format("%-25s | %-6s |","Name","Sum"));
+        logger.trace("------------------------------------");
+        for(Result r: list){
+            logger.trace(String.format("%-25s | %-6.3f |",r.getName(),r.getSum()));
+        }
+    }
 
 }

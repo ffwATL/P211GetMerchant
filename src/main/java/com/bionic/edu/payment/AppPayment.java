@@ -25,9 +25,9 @@ public class AppPayment {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppPayment app = (AppPayment) context.getBean("appPayment");
-        app.save(32, 2, "tester", 999.0, 9.0);
-        app.getPaymentSum();
-        /*app.findAll();*/
+       /* app.save(32, 2, "tester", 999.0, 9.0);
+        app.getPaymentSum();*/
+        app.findAll();
     }
 
     private Double getPaymentSum(){
