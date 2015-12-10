@@ -22,5 +22,6 @@ public interface MerchantDao {
 
 	public List<Result> getTotalReport();
 
+	public List<Merchant> getSortedByNeedToPay();
 
 }

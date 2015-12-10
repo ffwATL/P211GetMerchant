@@ -1,6 +1,7 @@
 package com.bionic.edu.merchant;
 
 import com.bionic.edu.customer.CustomerService;
+import com.bionic.edu.payment.Payment;
 import com.bionic.edu.payment.PaymentService;
 import com.bionic.edu.result.Result;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -26,7 +28,29 @@ public class AppMerchant {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppMerchant app = (AppMerchant)context.getBean("appMerchant");
-        app.getTotalReport();
+        app.getAllPayments();
+    }
+
+    private void getAllPayments(){
+        List<Result> hardList = new ArrayList<>();
+        for (Merchant m: merchantService.getSortedByNeedToPay()){
+           hardList.add(new Result(m.getName(), m.getPayments()));
+        }
+        for (Result r: hardList){
+            logger.trace(r.getName());
+            for(Payment p: r.getPayments()){
+                logger.trace(p.getGoods()+ " " + p.getSumPayed());
+            }
+        }
+    }
+
+    private void getSortedByNeedToPay(){
+        List<Merchant> list = merchantService.getSortedByNeedToPay();
+        logger.trace(String.format("%-25s | %-12s |","Name","Need to send"));
+        logger.trace("------------------------------------------");
+        for(Merchant m: list){
+            logger.trace(String.format("%-25s | %-12f |", m.getName(), m.getNeedToSend()));
+        }
     }
 
     private void findAll(){
@@ -42,7 +66,7 @@ public class AppMerchant {
 
     private void getTotalReport(){
         List<Result> list = merchantService.getTotalReport();
-        logger.trace(String.format("%-25s | %-6s |","Name","Sum"));
+        logger.trace(String.format("%-25s | %-12s |","Name","Sum"));
         logger.trace("------------------------------------");
         for(Result r: list){
             logger.trace(String.format("%-25s | %-6.3f |",r.getName(),r.getSum()));

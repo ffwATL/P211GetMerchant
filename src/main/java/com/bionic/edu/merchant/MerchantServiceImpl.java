@@ -43,4 +43,9 @@ public class MerchantServiceImpl implements MerchantService{
 		return merchantDao.getTotalReport();
 	}
 
+	@Override
+	public List<Merchant> getSortedByNeedToPay() {
+		return merchantDao.getSortedByNeedToPay();
+	}
+
 }

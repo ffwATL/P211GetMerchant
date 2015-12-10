@@ -80,4 +80,9 @@ public class Payment {
     public int getMerchantId(){
         return merchant != null ? merchant.getId() : 0;
     }
+
+    @Override
+    public String toString(){
+        return " " + getSumPayed();
+    }
 }

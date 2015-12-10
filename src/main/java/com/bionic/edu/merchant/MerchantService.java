@@ -22,5 +22,6 @@ public interface MerchantService {
 
     public List<Result> getTotalReport();
 
+    public List<Merchant> getSortedByNeedToPay();
 
 }
