@@ -1,11 +1,11 @@
 package com.bionic.edu.customer;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.bionic.edu.merchant.Merchant;
+
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class Customer {
@@ -19,6 +19,18 @@ public class Customer {
     private String ccno;
     private String cctype;
     private Date maturity;
+
+    @ManyToMany
+    @JoinTable(name = "Payment", joinColumns = @JoinColumn(name = "customerId"), inverseJoinColumns = @JoinColumn(name = "merchantId"))
+    private Collection<Merchant> merchants;
+
+    public Collection<Merchant> getMerchants(){
+        return this.merchants;
+    }
+
+    public void setMerchants(Collection<Merchant> merchants){
+        this.merchants = merchants;
+    }
 
     public String getCctype() {
         return cctype;
@@ -78,7 +90,7 @@ public class Customer {
 
     @Override
     public String toString(){
-        return "" + getId();
+        return getId() + " " + getName();
     }
 
 }

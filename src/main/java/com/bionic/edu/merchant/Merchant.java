@@ -13,7 +13,6 @@ public class Merchant {
     private String name;
     private String bankName;
     private String swift;
-    
     private String account;
     private double charge;
     private short period;
