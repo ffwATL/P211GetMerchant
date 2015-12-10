@@ -31,24 +31,20 @@ public class MerchantDaoImpl implements MerchantDao{
 	@Transactional
 	public void remove(int id) {
 		Merchant m = em.find(Merchant.class, id);
-		if(m != null){
-			em.remove(m);
-		}
+		if(m != null) em.remove(m);
 	}
 
 	@Override
 	public void updateAccount(int id, String newAcc) {
 		Merchant m = em.find(Merchant.class, id);
-		if(m != null){
-			m.setAccount(newAcc);
-		}
+		if(m != null) m.setAccount(newAcc);
 	}
 
 	@Override
 	public List<Result> getTotalReport() {
-		String txt = "SELECT new com.bionic.edu.result.Result (m.name, SUM(p.chargePayed))";
-		txt += "FROM Payment p, Merchant m WHERE m.id = p.merchant.id GROUP BY m.name";
-		TypedQuery<Result> query = em.createQuery(txt, Result.class);
+		StringBuilder builder = new StringBuilder("SELECT new com.bionic.edu.result.Result (m.name, SUM(p.chargePayed))");
+		builder.append("FROM Payment p, Merchant m WHERE m.id = p.merchant.id GROUP BY m.name");
+		TypedQuery<Result> query = em.createQuery(builder.toString(), Result.class);
 		return query.getResultList();
 	}
 
