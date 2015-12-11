@@ -9,16 +9,5 @@
     <listener-class>
 			org.springframework.web.context.ContextLoaderListener
         </listener-class>
-  </listener>
-  <servlet>
-    <servlet-name>Merchant</servlet-name>
-    <servlet-class>
-			org.springframework.web.servlet.DispatcherServlet
-     	</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Merchant</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+  </listener>  
 </web-app>
