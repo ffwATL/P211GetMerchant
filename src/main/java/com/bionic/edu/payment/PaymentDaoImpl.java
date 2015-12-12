@@ -33,7 +33,10 @@ public class PaymentDaoImpl implements PaymentDao{
     @Override
     public void save(Payment p) throws GetMerchantException {
         if(em.find(Customer.class, p.getCustomerId()) != null){
-            if(em.find(Merchant.class, p.getMerchantId()) != null) em.persist(p);
+            if(em.find(Merchant.class, p.getMerchantId()) != null){
+                if(p.getSumPayed() < 0) throw new GetMerchantException("sum payed can't be less than 0");
+                em.persist(p);
+            }
             else throw new NoSuchMerchantException("No such merchant Exception! Wrong Id given: " + p.getMerchantId());
         } else {
             throw new NoSuchCustomerException("No such customer Exception! Wrong customer Id given: " + p.getCustomerId());

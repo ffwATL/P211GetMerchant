@@ -32,7 +32,7 @@ public class AppPayment {
         AppPayment app = (AppPayment) context.getBean("appPayment");
        /* app.save(32, 2, "tester", 999.0, 9.0);*/
         /*app.getPaymentSum();*/
-        app.save(1,10,"there is test fucked", 15.0);
+        app.save(2,2,"second merchant goods", 150.0);
         /*app.findAll();*/
     }
 
