@@ -1,0 +1,57 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+
+}
+h3#header {
+    letter-spacing: 4px;
+    /*padding-top: 200px;*/
+    color: #A87B7B;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table.button{
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+}
+
+.button tr{
+    text-align: center;
+    vertical-align: middle;
+    background-color: #6071B3;
+}
+
+.button td{
+    border-radius: 2px;
+    padding: 5px;
+}
+.button tr:hover{
+    transition: background .4s;
+    background-color: #A87B7B;
+}
+.button tr:active{
+    transition: background .2s;
+    background-color: #A0B88A;
+}
+.button a {
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+}
+
+.container {
+    left: 50%;
+    position: fixed;
+    top: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.form {
+    width: 300px;
+    background-color: #C8D1E6;
+    padding: 5px;
+    border-radius: 4px;
+}
