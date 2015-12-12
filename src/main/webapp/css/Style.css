@@ -3,8 +3,10 @@ body {
 
 }
 h3#header {
-    font-weight: bold;
-    letter-spacing: 4px;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 21px;
+    letter-spacing: 3px;
     color: #454545;
     text-align: center;
     vertical-align: middle;
@@ -19,7 +21,7 @@ table.button{
 .button tr{
     text-align: center;
     vertical-align: middle;
-    background-color: #6071B3;
+    background-color: #4C5578;
 }
 
 .button td{
@@ -28,12 +30,12 @@ table.button{
 }
 .button tr:hover{
     transition: background .4s;
-    background-color: #A87B7B;
+    background-color: #7781A8;
     cursor: pointer;
 }
 .button tr:active{
     transition: background .2s;
-    background-color: #A0B88A;
+    background-color: #AB3E3E;
 }
 .button a {
     color: white;
@@ -51,7 +53,7 @@ table.button{
 }
 .form {
     width: 300px;
-    background-color: #C8D1E6;
+    background-color: #E6E9F2;
     padding: 5px;
     border-radius: 4px;
 }
