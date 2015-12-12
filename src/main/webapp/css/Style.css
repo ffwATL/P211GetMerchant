@@ -15,24 +15,26 @@ h3#header {
     border-radius: 5px 5px 0 0;
 }
 
-table.button{
+.button th{
+    padding-bottom: 15px;
+    color: #C4C4C4;;
+}
+.button{
     font: 400 16px/1.5em sans-serif;
     margin-right: auto;
     margin-left: auto;
-    padding-top: 15%;
-}
-
-.button tr{
-    text-align: center;
-    vertical-align: middle;
-    background-color: #38ABBA;
+    padding-top: 5%;
 }
 
 .button td{
+    text-align: center;
+    vertical-align: middle;
+    background-color: #38ABBA;
     border-radius: 2px;
     padding: 8px;
 }
-.button tr:hover{
+
+.button td:hover{
     transition: background .4s;
     background-color: #267580;
     cursor: pointer;
@@ -53,7 +55,8 @@ table.button{
     transform: translate(-50%, -50%);
 }
 .form {
-    width: 350px;
+    width: 510px;
+    height: 300px;
     padding: 5px;
     border-radius: 4px;
 }
@@ -73,6 +76,7 @@ table.button{
 }
 
 p#home a{
+    text-transform: uppercase;
     padding-left: 8px;
     font-size: 12px;
     color: #C4C4C4;
@@ -91,7 +95,6 @@ select {
     box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
     background: #f8f8f8;
     color:#888;
-   /* border:none;*/
     outline:none;
     display: inline-block;
     -webkit-appearance:none;
@@ -99,3 +102,37 @@ select {
     appearance:none;
     cursor:pointer;
 }
+.list{
+    padding-top: 18px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.list th{
+    padding: 2px;
+    font-size: 14px;
+    /*background-color: #DDEDEB;*/
+}
+.list tr:nth-child(even){
+    background-color: #D8E3C5;
+}
+.list td{
+    padding: 3px 4px 3px 4px;
+    text-align: center;
+    font-size: 12px;
+}
+.info{
+    font-size: 13px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #C4C4C4;
+    text-align: justify;
+    width: 310px;
+    word-wrap: break-word;
+    /*padding: 5px;*/
+    border-radius: 4px;
+}
+/*
+.list tr:hover{
+    background-color: #E3C5CE;
+}*/
