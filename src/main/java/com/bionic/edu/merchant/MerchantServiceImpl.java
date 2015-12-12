@@ -48,4 +48,10 @@ public class MerchantServiceImpl implements MerchantService{
 		return merchantDao.getSortedByNeedToPay();
 	}
 
+    @Override
+    @Transactional
+    public void updateNeedToSend(int id, double s) {
+        merchantDao.updateNeedToSend(id, s);
+    }
+
 }

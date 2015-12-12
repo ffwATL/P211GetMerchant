@@ -40,7 +40,12 @@ public class MerchantDaoImpl implements MerchantDao{
 		if(m != null) m.setAccount(newAcc);
 	}
 
-
+    @Override
+    @Transactional
+    public void updateNeedToSend(int id, double s){
+        Merchant m = findById(id);
+        if(m != null) m.setNeedToSend(m.getNeedToSend() + s - m.getCharge());
+    }
 
 	@Override
 	public List<Merchant> getSortedByNeedToPay(){

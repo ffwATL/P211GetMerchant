@@ -24,4 +24,7 @@ public interface MerchantService {
 
     public List<Merchant> getSortedByNeedToPay();
 
+    @Transactional
+    public void updateNeedToSend(int id, double s);
+
 }

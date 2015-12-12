@@ -1,6 +1,9 @@
 package com.bionic.edu.payment;
 
 
+import com.bionic.edu.GetMerchantException;
+import com.bionic.edu.customer.CustomerService;
+import com.bionic.edu.merchant.Merchant;
 import com.bionic.edu.merchant.MerchantService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +22,8 @@ public class AppPayment {
     PaymentService paymentService;
     @Inject
     MerchantService merchantService;
+    @Inject
+    CustomerService customerService;
 
     private static Logger logger = LogManager.getLogger();
 
@@ -26,7 +31,8 @@ public class AppPayment {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         AppPayment app = (AppPayment) context.getBean("appPayment");
        /* app.save(32, 2, "tester", 999.0, 9.0);*/
-        app.getPaymentSum();
+        /*app.getPaymentSum();*/
+        app.save(1,10,"there is test fucked", 15.0);
         /*app.findAll();*/
     }
 
@@ -48,15 +54,22 @@ public class AppPayment {
         }
     }
 
-    private void save(int merchantId, int customerId, String goods, double sumPayed, double chargePayed){
-        Payment p = new Payment();
-        p.setDt(new Timestamp(System.currentTimeMillis()));
-        p.setChargePayed(chargePayed);
-        p.setCustomerId(customerId);
-        p.setGoods(goods);
-        p.setSumPayed(sumPayed);
-        p.setMerchant(merchantService.findById(merchantId));
-        paymentService.save(p);
+    private void save(int merchantId, int customerId, String goods, double sumPayed) {
+        Merchant m = merchantService.findById(merchantId);
+        if(m != null){
+            Payment p = new Payment();
+            p.setCustomerId(customerId);
+            p.setMerchant(m);
+            p.setGoods(goods);
+            p.setSumPayed(sumPayed);
+            p.setDt(new Timestamp(System.currentTimeMillis()));
+            p.setChargePayed(m.getCharge());
+            try {
+                paymentService.save(p);
+                merchantService.updateNeedToSend(merchantId, sumPayed);
+            } catch (GetMerchantException e) {
+                logger.error(e.getMessage());
+            }
+        }
     }
-
 }

@@ -1,7 +1,11 @@
 package com.bionic.edu.payment;
 
 
+import com.bionic.edu.GetMerchantException;
 import com.bionic.edu.customer.Customer;
+import com.bionic.edu.customer.NoSuchCustomerException;
+import com.bionic.edu.merchant.Merchant;
+import com.bionic.edu.merchant.NoSuchMerchantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -27,11 +31,13 @@ public class PaymentDaoImpl implements PaymentDao{
 
     @Transactional
     @Override
-    public void save(Payment p){
+    public void save(Payment p) throws GetMerchantException {
         if(em.find(Customer.class, p.getCustomerId()) != null){
-            if(em.find(Customer.class, p.getMerchantId())!= null) em.persist(p);
-            else logger.warn("wrong merchant Id given: " + p.getMerchantId());
-        } else logger.warn("Wrong customer Id given: " + p.getCustomerId());
+            if(em.find(Merchant.class, p.getMerchantId()) != null) em.persist(p);
+            else throw new NoSuchMerchantException("No such merchant Exception! Wrong Id given: " + p.getMerchantId());
+        } else {
+            throw new NoSuchCustomerException("No such customer Exception! Wrong customer Id given: " + p.getCustomerId());
+        }
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.bionic.edu.payment;
 
 
+import com.bionic.edu.GetMerchantException;
+
 import java.util.List;
 
 public interface PaymentService {
@@ -9,7 +11,7 @@ public interface PaymentService {
 
     public Payment findById(int id);
 
-    public void save(Payment p);
+    public void save(Payment p) throws GetMerchantException;
 
     public double getPaymentSum();
 

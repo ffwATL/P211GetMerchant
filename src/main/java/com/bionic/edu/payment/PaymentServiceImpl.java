@@ -1,6 +1,7 @@
 package com.bionic.edu.payment;
 
 
+import com.bionic.edu.GetMerchantException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -24,7 +25,7 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     @Transactional
-    public void save(Payment p) {
+    public void save(Payment p) throws GetMerchantException{
         paymentDao.save(p);
     }
 
