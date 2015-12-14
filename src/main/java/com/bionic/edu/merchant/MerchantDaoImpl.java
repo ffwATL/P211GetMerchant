@@ -49,8 +49,7 @@ public class MerchantDaoImpl implements MerchantDao{
 
 	@Override
 	public List<Merchant> getSortedByNeedToPay(){
-		StringBuilder builder = new StringBuilder("SELECT m FROM Merchant m ORDER BY m.needToSend");
-		TypedQuery<Merchant> query = em.createQuery(builder.toString(), Merchant.class);
+		TypedQuery<Merchant> query = em.createQuery("SELECT m FROM Merchant m ORDER BY m.needToSend", Merchant.class);
 		return query.getResultList();
 	}
 
