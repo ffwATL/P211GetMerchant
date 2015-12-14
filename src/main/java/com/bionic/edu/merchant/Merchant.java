@@ -122,6 +122,14 @@ public class Merchant {
 	public void setLastSent(java.sql.Date lastSent) {
 		this.lastSent = lastSent;
 	}
+	
+	public String getDataForWeb(){
+	     String ret = "<tr><td>" + name +"<td>" +  
+	          bankName + "<td>" + charge + "<td>" + 
+	          minSum + "</tr>";
+	     return ret;
+	}
+
 
 	@Override
 	public String toString(){

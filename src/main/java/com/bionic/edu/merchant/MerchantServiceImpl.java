@@ -53,5 +53,7 @@ public class MerchantServiceImpl implements MerchantService{
     public void updateNeedToSend(int id, double s) {
         merchantDao.updateNeedToSend(id, s);
     }
+    
+    
 
 }
