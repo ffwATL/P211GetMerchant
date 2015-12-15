@@ -42,7 +42,7 @@
                         <td><input type="submit" value="Show All" name="choice"></td>
                     </form>
                     <form id="one" action="showPayment.jsp" method="get">
-                        <td><input type="submit" value="Show One" name="choice"></td>
+                        <td><input type="submit" value="Show Single" name="choice"></td>
                     </form>
                     <form id="add" action="addPayment.jsp" method="get">
                         <td><input type="submit" value="Add New" name="choice"></td>

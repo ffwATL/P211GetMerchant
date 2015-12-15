@@ -1,7 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #F0F0F0;
+
 }
+
 h3#header {
     background-color: #282830;
     font-weight: normal;
@@ -65,13 +67,17 @@ h3#header {
 }*/
 
 .container {
-    margin: 0;
+    overflow: visible;
+    /*margin: 0;*/
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 5%;
     left: 50%;
-    position: fixed;
+    /*position: fixed;*/
     top: 35%;
-    -webkit-transform: translate(-50%, -50%);
+    /*-webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
 }
 .form {
     width: 600px;
@@ -119,7 +125,7 @@ select:hover{
     background: url("arrow_mini_hover.png") no-repeat right #E2EBE1;
 }
 .box{
-    margin-bottom: 38px;
+    margin-bottom: 21px;
 }
 .list{
     padding-top: 18px;
@@ -167,14 +173,14 @@ input[type="text"], input[type=number] {
     background-color: #E2EBE1;
     border: solid 1px white;
 }
-form#id input{
+input#id {
     width: 40px;
 }
-form#price input{
+input#price {
     width: 70px;
 }
 
-form#goods input{
+input#goods {
     width: 200px;
 }
 
@@ -208,5 +214,4 @@ p#operation{
 p#ok{
     font-size: 16px;
     text-align: center;
-
 }

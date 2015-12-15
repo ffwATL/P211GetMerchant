@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>P211GetMerchant</title>
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
 </head>
