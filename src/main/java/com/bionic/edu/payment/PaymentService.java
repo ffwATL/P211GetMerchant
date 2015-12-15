@@ -15,5 +15,6 @@ public interface PaymentService {
 
     public double getPaymentSum();
 
+    public List<Payment> findByMerchantId(int id);
 
 }

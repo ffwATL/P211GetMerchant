@@ -33,4 +33,9 @@ public class PaymentServiceImpl implements PaymentService{
     public double getPaymentSum() {
         return paymentDao.getPaymentSum();
     }
+
+    @Override
+    public List<Payment> findByMerchantId(int id) {
+        return paymentDao.findByMerchantId(id);
+    }
 }

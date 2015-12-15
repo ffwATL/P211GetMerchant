@@ -15,4 +15,6 @@ public interface PaymentDao {
 
     public double getPaymentSum();
 
+    public List<Payment> findByMerchantId(int id);
+
 }

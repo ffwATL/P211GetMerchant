@@ -49,6 +49,12 @@ public class PaymentDaoImpl implements PaymentDao{
         return query.getSingleResult();
     }
 
+    @Override
+    public List<Payment> findByMerchantId(int id) {
+        TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchant.id="+id,Payment.class);
+        return query.getResultList();
+    }
+
     public Payment findById(int id){
         return em.find(Payment.class, id);
     }

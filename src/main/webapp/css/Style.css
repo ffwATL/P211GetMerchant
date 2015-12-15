@@ -27,23 +27,42 @@ h3#header {
 }
 
 .button td{
-    text-align: center;
+    /*text-align: center;
     vertical-align: middle;
     background-color: #38ABBA;
     border-radius: 2px;
-    padding: 8px;
+    padding: 8px;*/
 }
-
-.button td:hover{
+.button input{
+    font-size: 16px;
+    color: white;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #38ABBA;
+    border: none;
+    border-radius: 2px;
+    padding: 12px;
+}
+.button input:hover{
     transition: background .4s;
     background-color: #267580;
     cursor: pointer;
+    border: none;
+    border-radius: 2px;
 }
-.button a {
+
+.button td:hover{
+    /*transition: background .4s;
+    background-color: #267580;
+    cursor: pointer;*/
+}
+/*.button a {
     color: white;
     text-decoration: none;
     padding: 12px;
-}
+}*/
 
 .container {
     margin: 0;
