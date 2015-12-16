@@ -201,6 +201,15 @@ input#goods {
     padding-right: 6px;
     padding-left: 6px;
 }
+input.update{
+    background-color: #C26B46;
+}
+input.update:hover{
+    background-color: #8C4F34;
+}
+td#center{
+    padding-left: 30px;
+}
 img.operation{
     width: 80px;
     height: 80px;

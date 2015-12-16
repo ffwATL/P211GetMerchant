@@ -70,7 +70,7 @@
                         <td><input type="submit" value="Home" name="choice"></td>
                     </form>
                     <form action=<%out.print(back);%> method="get">
-                        <td><input type="submit" value="back" name="choice"></td>
+                        <td id="center"><input type="submit" value="back" name="choice"></td>
                     </form>
                 </tr>
             </table>

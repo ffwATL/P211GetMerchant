@@ -43,7 +43,7 @@
                         <td><input type="submit" value="Show Single" name="choice"></td>
                     </form>
                     <form id="add" action="addpayment.jsp" method="get">
-                        <td><input type="submit" value="Add New" name="choice"></td>
+                        <td><input class="update" type="submit" value="Add New" name="choice"></td>
                     </form>
                 </tr>
             </table>

@@ -70,7 +70,7 @@
                         <td><input type="submit" value="Back"></td>
                     </form>
                     <form action="/index.jsp" method="get">
-                        <td><input type="submit" value="Home"></td>
+                        <td id="center"><input type="submit" value="Home"></td>
                     </form>
                 </tr>
             </table>

@@ -43,10 +43,10 @@
                     </form>
                     <form id="one" action="showpaylist.jsp" method="post">
                         <td><input type="submit" value="Show Single" name="choice"></td>
-                        <td><input type="submit" value="Update Single" name="choice"></td>
+                        <td id="center"><input class="update" type="submit" value="Update Single" name="choice"></td>
                     </form>
                     <form action="showpaylist.jsp" method="post">
-                        <td><input type="submit" value="Update All" name="choice"></td>
+                        <td><input class="update" type="submit" value="Update All" name="choice"></td>
                     </form>
                 </tr>
             </table>
