@@ -1,29 +1,29 @@
+<%@ page import="com.bionic.edu.merchant.Merchant" %>
+<%@ page import="com.bionic.edu.merchant.MerchantService" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="com.bionic.edu.merchant.MerchantService" %>
-<%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Payments</title>
+    <title>Pay List</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
 </head>
 <body>
 <div class="container">
     <div class="form">
-        <h3 id="header">Payments</h3>
+        <h3 id="header">Pay List</h3>
         <div class="inner">
             <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
                 MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
             %>
-        <table class="input">
+            <table class="input">
                 <tr>
                     <td>
-                        <select form="one" form="add" name="merchant">
+                        <select form="one" name="merchant">
                             <%
                                 for (Merchant m: merchantService.findAll()){
-                                    out.print("<option" + " value=" +m.getId()+">" + m.getName() + "</option>");
+                                    out.print("<option" + " value=" + m.getId() + ">" + m.getName() + "</option>");
                                 }
                             %>
                         </select>
@@ -31,19 +31,22 @@
                 </tr>
             </table>
             <div class="info">
-                <p>Select merchant from list above and click 'Show Single' to view all the payments for only one merchant.
-                    Click 'Add New' if you want to add a new payment. Choose 'Show All' if you want to view all the
-                    payments for every merchant.
+                <p>Select merchant from list above and click 'Show One' to view pay list for only one merchant.
+                    Click 'Generate New' if you want to add a new list for chosen merchant. If list is already exist for current,
+                    merchant it will be updated due to the DB data. Chose 'Show All' if you want to view pay list for every merchant.
                 </p>
             </div>
             <table class="button">
                 <tr>
-                    <form id="one" action="showpayment.jsp" method="get">
+                    <form action="showpaylist.jsp" method="get">
                         <td><input type="submit" value="Show All" name="choice"></td>
-                        <td><input type="submit" value="Show Single" name="choice"></td>
                     </form>
-                    <form id="add" action="addpayment.jsp" method="get">
-                        <td><input type="submit" value="Add New" name="choice"></td>
+                    <form id="one" action="showpaylist.jsp" method="post">
+                        <td><input type="submit" value="Show Single" name="choice"></td>
+                        <td><input type="submit" value="Update Single" name="choice"></td>
+                    </form>
+                    <form action="showpaylist.jsp" method="post">
+                        <td><input type="submit" value="Update All" name="choice"></td>
                     </form>
                 </tr>
             </table>

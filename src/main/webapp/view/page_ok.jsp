@@ -8,12 +8,6 @@
 <%@ page import="com.bionic.edu.GetMerchantException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Ok</title>
-    <link rel="stylesheet" type="text/css" href="../../css/Style.css">
-    <link rel="shortcut icon" href="../../css/icon.png">
-</head>
-<body>
 <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
     PaymentService paymentService = (PaymentService) context.getBean("paymentServiceImpl");
     MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
@@ -22,7 +16,7 @@
     String back = "";
     if(param != null){
         if(param.equals("add new payment")){
-            back = "addPayment.jsp";
+            back = "payments.jsp";
             Payment p = new Payment();
             Merchant m = merchantService.findById(Integer.valueOf(request.getParameter("merchant")));
             double sumPayed = Double.valueOf(request.getParameter("price"));
@@ -36,13 +30,21 @@
             try {
                 paymentService.save(p);
                 merchantService.updateNeedToSend(m.getId(), sumPayed);
-                info = "Payment was successfully added to DB. Id: " + p.getId();
+                info = "Payment was successfully added to the DB. Transaction Id: " + p.getId();
             } catch (GetMerchantException e) {
                 response.sendRedirect("page_fail.jsp");
             }
         }
     }else response.sendRedirect("page_fail.jsp");
-    %>
+%>
+<head>
+    <title>Ok</title>
+    <link rel="stylesheet" type="text/css" href="../../css/Style.css">
+    <link rel="shortcut icon" href="../../css/icon.png">
+    <meta http-equiv="refresh" content="5;url=<%out.print(back);%>" />
+</head>
+<body>
+
 <div class="container">
     <div class="form">
         <h3 id="header">Successful!</h3>

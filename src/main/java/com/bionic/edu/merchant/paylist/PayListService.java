@@ -10,4 +10,6 @@ public interface PayListService {
     public List<PayList> findAll();
 
     public PayList findByMerchantId(int id);
+
+    public List<PayList> updateAll();
 }

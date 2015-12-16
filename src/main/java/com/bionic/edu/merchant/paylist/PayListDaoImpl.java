@@ -25,10 +25,12 @@ public class PayListDaoImpl implements PayListDao {
         PayList p = findByMerchantId(merchantId);
         Merchant m = em.find(Merchant.class, merchantId);
         if(m != null){
+            em.refresh(m);
             if(p == null) p = PayList.getInstance();
             p.setMerchantId(merchantId);
             p.setMinSum(m.getMinSum());
             p.setPeriod(m.getPeriod());
+            p.setNeedToSend(m.getNeedToSend());
             em.persist(p);
         }
     }
@@ -49,5 +51,15 @@ public class PayListDaoImpl implements PayListDao {
             logger.trace(e.getMessage());
         }
         return p;
+    }
+
+    @Override
+    @Transactional
+    public List<PayList> updateAll() {
+        TypedQuery<Merchant> mQuery = em.createQuery("SELECT m FROM Merchant m", Merchant.class);
+        for(Merchant m: mQuery.getResultList()){
+            addPayList(m.getId());
+        }
+        return findAll();
     }
 }

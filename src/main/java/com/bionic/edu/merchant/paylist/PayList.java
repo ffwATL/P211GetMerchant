@@ -16,6 +16,18 @@ public class PayList {
 
     private double minSum;
 
+    private short period;
+
+    public double getNeedToSend() {
+        return needToSend;
+    }
+
+    public void setNeedToSend(double needToSend) {
+        this.needToSend = needToSend;
+    }
+
+    private double needToSend;
+
     public static PayList getInstance(){
         return new PayList();
     }
@@ -52,6 +64,6 @@ public class PayList {
         this.minSum = minSum;
     }
 
-    private short period;
+
 
 }

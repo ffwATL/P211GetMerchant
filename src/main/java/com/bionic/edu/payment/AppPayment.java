@@ -2,7 +2,6 @@ package com.bionic.edu.payment;
 
 
 import com.bionic.edu.GetMerchantException;
-import com.bionic.edu.customer.CustomerService;
 import com.bionic.edu.merchant.Merchant;
 import com.bionic.edu.merchant.MerchantService;
 import org.apache.logging.log4j.LogManager;
@@ -22,8 +21,7 @@ public class AppPayment {
     PaymentService paymentService;
     @Inject
     MerchantService merchantService;
-    @Inject
-    CustomerService customerService;
+
 
     private static Logger logger = LogManager.getLogger();
 

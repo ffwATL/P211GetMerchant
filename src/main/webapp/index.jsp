@@ -26,12 +26,12 @@
                     </form>
                 </tr>
                 <tr>
-                    <form action="view/payList.jsp" method="get">
+                    <form action="view/paylist.jsp" method="get">
                         <td><input type="submit" value="Pay List" name="go"></td>
                     </form>
                 </tr>
                 <tr>
-                    <form action="view/moneyTransfer.jsp" method="get">
+                    <form action="view/moneytransfer.jsp" method="get">
                         <td><input type="submit" value="Money Transfer" name="go"></td>
                     </form>
                 </tr>

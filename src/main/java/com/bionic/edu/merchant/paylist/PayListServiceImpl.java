@@ -24,4 +24,9 @@ public class PayListServiceImpl implements PayListService{
     public PayList findByMerchantId(int id) {
         return payListDao.findByMerchantId(id);
     }
+
+    @Override
+    public List<PayList> updateAll() {
+        return payListDao.updateAll();
+    }
 }
