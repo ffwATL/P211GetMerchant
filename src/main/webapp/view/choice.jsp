@@ -1,7 +1,7 @@
 <%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page import="com.bionic.edu.merchant.MerchantService" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplate" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList1" %>
+<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList_" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
@@ -11,7 +11,7 @@
     <%
         ChoiceTemplate choice = null;
         if(request.getParameter("go").equals("Pay List")){
-            choice = ChoiceTemplatePayList1.getInstance();
+            choice = ChoiceTemplatePayList_.getInstance();
         }else if(request.getParameter("go").equals("Payments") || request.getParameter("go").equals("Payment")){
             choice = ChoiceTemplatePayments.getInstance();
         }else response.sendRedirect("page_fail.jsp");

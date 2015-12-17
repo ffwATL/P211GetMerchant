@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ChoiceTemplatePayList1 implements ChoiceTemplate {
+public class ChoiceTemplatePayList_ implements ChoiceTemplate {
 
     private static List<String> resultHeaders = new LinkedList<>();
 
@@ -35,10 +35,10 @@ public class ChoiceTemplatePayList1 implements ChoiceTemplate {
         resultHeaders.add("Need to send");
     }
 
-    private ChoiceTemplatePayList1(){}
+    private ChoiceTemplatePayList_(){}
 
     public static ChoiceTemplate getInstance(){
-        return choiceTemplate == null ? choiceTemplate = new ChoiceTemplatePayList1() : choiceTemplate;
+        return choiceTemplate == null ? choiceTemplate = new ChoiceTemplatePayList_() : choiceTemplate;
     }
 
     @Override

@@ -2,7 +2,7 @@
 <%@ page import="com.bionic.edu.merchant.paylist.PayListService" %>
 <%@ page import="com.bionic.edu.payment.Payment" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplate" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList1" %>
+<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList_" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
@@ -26,7 +26,7 @@
         if(from.equals("Payment")) {
             choice = ChoiceTemplatePayments.getInstance();
             if(choiceParam.equals("Add New")){
-                response.sendRedirect("addpayment1.jsp?go=Payment");
+                response.sendRedirect("addpayment.jsp?go=Payment");
             }
             paymentService = (PaymentService) context.getBean("paymentServiceImpl");
             if(choiceParam.equals("Show All")){
@@ -35,7 +35,7 @@
                 paymentList = paymentService.findByMerchantId(id);
             }
         }else if(from.equals("Pay List")){
-            choice = ChoiceTemplatePayList1.getInstance();
+            choice = ChoiceTemplatePayList_.getInstance();
             payListService = (PayListService) context.getBean("payListServiceImpl");
             if(choiceParam.equals("Show All")) payListList = payListService.findAll();
             else if(choiceParam.equals("Show Single")) payListList = payListService.findByMerchantId(id);
