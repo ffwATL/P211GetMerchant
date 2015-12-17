@@ -21,12 +21,12 @@
                     <th><p>Choose Your Destiny</p></th>
                 </tr>
                 <tr>
-                    <form action="view/payments.jsp" method="get">
+                    <form action="view/choice.jsp" method="get">
                         <td><input type="submit" value="Payments" name="go"></td>
                     </form>
                 </tr>
                 <tr>
-                    <form action="view/paylist.jsp" method="get">
+                    <form action="view/choice.jsp" method="get">
                         <td><input type="submit" value="Pay List" name="go"></td>
                     </form>
                 </tr>

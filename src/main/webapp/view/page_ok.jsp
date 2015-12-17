@@ -5,18 +5,16 @@
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page import="java.sql.Timestamp" %>
-<%@ page import="com.bionic.edu.GetMerchantException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
     PaymentService paymentService = (PaymentService) context.getBean("paymentServiceImpl");
     MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
-    String param = request.getParameter("choice");
+    String choice = request.getParameter("choice");
+    String go = request.getParameter("go");
     String info = "";
-    String back = "";
-    if(param != null){
-        if(param.equals("add new payment")){
-            back = "payments.jsp";
+    if(choice != null){
+        if(choice.equals("Add New Payment")){
             Payment p = new Payment();
             Merchant m = merchantService.findById(Integer.valueOf(request.getParameter("merchant")));
             double sumPayed = Double.valueOf(request.getParameter("price"));
@@ -31,7 +29,7 @@
                 paymentService.save(p);
                 merchantService.updateNeedToSend(m.getId(), sumPayed);
                 info = "Payment was successfully added to the DB. Transaction Id: " + p.getId();
-            } catch (GetMerchantException e) {
+            } catch (Exception e) {
                 response.sendRedirect("page_fail.jsp");
             }
         }
@@ -41,7 +39,7 @@
     <title>Ok</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
-    <meta http-equiv="refresh" content="5;url=<%out.print(back);%>" />
+    <meta http-equiv="refresh" content="5;url=choice.jsp?go=<%out.print(go);%>" />
 </head>
 <body>
 
@@ -69,8 +67,9 @@
                     <form id="add" action="/index.jsp" method="get">
                         <td><input type="submit" value="Home" name="choice"></td>
                     </form>
-                    <form action=<%out.print(back);%> method="get">
-                        <td id="center"><input type="submit" value="back" name="choice"></td>
+                    <form action="choice.jsp" method="get">
+                        <td id="center"><input type="submit" value="Back" name="choice"></td>
+                        <input type="hidden" value="<%out.print(go);%>" name="go">
                     </form>
                 </tr>
             </table>

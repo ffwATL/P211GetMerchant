@@ -1,7 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #F0F0F0;
-
 }
 
 h3#header {
@@ -28,13 +27,6 @@ h3#header {
     padding-top: 5%;
 }
 
-.button td{
-    /*text-align: center;
-    vertical-align: middle;
-    background-color: #38ABBA;
-    border-radius: 2px;
-    padding: 8px;*/
-}
 .button input{
     font-size: 16px;
     color: white;
@@ -54,33 +46,17 @@ h3#header {
     border: none;
     border-radius: 2px;
 }
-
-.button td:hover{
-    /*transition: background .4s;
-    background-color: #267580;
-    cursor: pointer;*/
-}
-/*.button a {
-    color: white;
-    text-decoration: none;
-    padding: 12px;
-}*/
-
 .container {
     overflow: visible;
-    /*margin: 0;*/
+
     margin-right: 25%;
     margin-left: 25%;
     margin-top: 5%;
     left: 50%;
-    /*position: fixed;*/
     top: 35%;
-    /*-webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);*/
 }
 .form {
-    width: 600px;
+    width: 620px;
     height: 300px;
     padding: 5px;
     border-radius: 4px;
@@ -118,6 +94,7 @@ select {
     border: none;
     display: inline-block;
     -webkit-appearance:none;
+    -mz-webkit-appearance:none;
     cursor:pointer;
     width: 180px;
 }

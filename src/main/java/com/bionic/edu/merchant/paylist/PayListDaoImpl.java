@@ -22,7 +22,9 @@ public class PayListDaoImpl implements PayListDao {
     @Override
     @Transactional
     public void addPayList(int merchantId) {
-        PayList p = findByMerchantId(merchantId);
+        List<PayList> list = findByMerchantId(merchantId);
+        PayList p = null;
+        if(list!=null)  p = list.get(0);
         Merchant m = em.find(Merchant.class, merchantId);
         if(m != null){
             em.refresh(m);
@@ -42,15 +44,15 @@ public class PayListDaoImpl implements PayListDao {
     }
 
     @Override
-    public PayList findByMerchantId(int id) {
+    public List<PayList> findByMerchantId(int id) {
         TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p WHERE p.merchantId =" + id, PayList.class);
         PayList p = null;
         try {
-            p = query.getSingleResult();
+            return query.getResultList();
         }catch (javax.persistence.NoResultException e){
             logger.trace(e.getMessage());
         }
-        return p;
+        return null;
     }
 
     @Override
