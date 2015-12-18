@@ -53,7 +53,11 @@ public class MerchantServiceImpl implements MerchantService{
     public void updateNeedToSend(int id, double s) {
         merchantDao.updateNeedToSend(id, s);
     }
-    
-    
+
+    @Override
+    public void resetNeedToSend(Merchant m) {
+        merchantDao.resetNeedToSend(m);
+    }
+
 
 }

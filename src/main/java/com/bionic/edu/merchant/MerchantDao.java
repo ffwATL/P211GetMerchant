@@ -27,4 +27,7 @@ public interface MerchantDao {
     @Transactional
     public void updateNeedToSend(int id, double s);
 
+    @Transactional
+    public void resetNeedToSend(Merchant m);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -21,20 +22,14 @@ public class PayListDaoImpl implements PayListDao {
 
     @Override
     @Transactional
-    public void addPayList(int merchantId) {
-        List<PayList> list = findByMerchantId(merchantId);
-        PayList p = null;
-        if(list != null)  p = list.get(0);
-        Merchant m = em.find(Merchant.class, merchantId);
-        if(m != null){
-            em.refresh(m);
-            if(p == null) p = PayList.getInstance();
-            p.setMerchantId(merchantId);
-            p.setMinSum(m.getMinSum());
-            p.setPeriod(m.getPeriod());
-            p.setNeedToSend(m.getNeedToSend());
-            em.persist(p);
-        }
+    public void addPayList(Merchant m) {
+        PayList p = PayList.getInstance();
+        p.setMerchantId(m.getId());
+        p.setMinSum(m.getMinSum());
+        p.setPeriod(m.getPeriod());
+        p.setNeedToSend(m.getNeedToSend());
+        p.setDt(new Date(System.currentTimeMillis()));
+        em.persist(p);
     }
 
     @Override
@@ -59,7 +54,7 @@ public class PayListDaoImpl implements PayListDao {
     public List<PayList> updateAll() {
         TypedQuery<Merchant> mQuery = em.createQuery("SELECT m FROM Merchant m", Merchant.class);
         for(Merchant m: mQuery.getResultList()){
-            addPayList(m.getId());
+            addPayList(m);
         }
         return findAll();
     }

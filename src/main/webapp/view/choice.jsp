@@ -47,8 +47,7 @@
             </div>
             <table class="button">
                 <tr>
-
-                    <form id="one" action="resultlist.jsp" method="get">
+                    <form id="one" action="resultlist.jsp" method="post">
                     <%
                         for(String s: choice.getButtonsShow()){
                             out.print("<td><input type=\"submit\" value=\"" + s + "\" name=\"choice\"></td>");

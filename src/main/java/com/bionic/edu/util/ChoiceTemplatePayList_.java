@@ -33,6 +33,7 @@ public class ChoiceTemplatePayList_ implements ChoiceTemplate {
         resultHeaders.add("Period");
         resultHeaders.add("Minimal sum");
         resultHeaders.add("Need to send");
+        resultHeaders.add("Date");
     }
 
     private ChoiceTemplatePayList_(){}

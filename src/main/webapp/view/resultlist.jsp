@@ -1,13 +1,14 @@
 <%@ page import="com.bionic.edu.merchant.paylist.PayList" %>
+<%@ page import="com.bionic.edu.merchant.paylist.PayListApp" %>
 <%@ page import="com.bionic.edu.merchant.paylist.PayListService" %>
 <%@ page import="com.bionic.edu.payment.Payment" %>
+<%@ page import="com.bionic.edu.payment.PaymentService" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplate" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplatePayList_" %>
 <%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.bionic.edu.payment.PaymentService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,10 +19,11 @@
         List<PayList> payListList = null;
         List<Payment> paymentList = null;
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
-        PayListService payListService;
         PaymentService paymentService;
         String idText = request.getParameter("merchant");
         int id = 0;
+        PayListApp payListApp = (PayListApp) context.getBean("payListApp");
+
         if(idText != null) id = Integer.valueOf(idText);
         if(from.equals("Payment")) {
             choice = ChoiceTemplatePayments.getInstance();
@@ -36,14 +38,13 @@
             }
         }else if(from.equals("Pay List")){
             choice = ChoiceTemplatePayList_.getInstance();
-            payListService = (PayListService) context.getBean("payListServiceImpl");
-            if(choiceParam.equals("Show All")) payListList = payListService.findAll();
-            else if(choiceParam.equals("Show Single")) payListList = payListService.findByMerchantId(id);
+            if(choiceParam.equals("Show All")) payListList = payListApp.findAll();
+            else if(choiceParam.equals("Show Single")) payListList = payListApp.findByMerchantId(id);
             else if(choiceParam.equals("Update Single")) {
-                payListService.addPayList(id);
-                payListList = payListService.findByMerchantId(id);
+                payListApp.add(id);
+                payListList = payListApp.findByMerchantId(id);
             }else {
-                payListList = payListService.updateAll();
+                payListList = payListApp.updateAll();
             }
         }else response.sendRedirect("page_fail.jsp");
 
@@ -72,7 +73,8 @@
                             out.println("<td>" + p.getMerchantId() + "</td>");
                             out.println("<td>" + p.getPeriod() + "</td>");
                             out.println("<td>" + p.getMinSum() + "</td>");
-                            out.println("<td>" + p.getNeedToSend() + "</td></tr>");
+                            out.println("<td>" + p.getNeedToSend() + "</td>");
+                            out.println("<td>" + p.getDt() + "</td></tr>");
                         }
                     }else if(from.equals("Payment")){
                         for(Payment p: paymentList){

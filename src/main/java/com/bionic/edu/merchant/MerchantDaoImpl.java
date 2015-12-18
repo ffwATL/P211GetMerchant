@@ -47,6 +47,13 @@ public class MerchantDaoImpl implements MerchantDao{
         if(m != null) m.setNeedToSend(m.getNeedToSend() + s - m.getCharge());
     }
 
+    @Override
+    @Transactional
+    public void resetNeedToSend(Merchant m){
+        em.merge(m);
+        m.setNeedToSend(0);
+    }
+
 	@Override
 	public List<Merchant> getSortedByNeedToPay(){
 		TypedQuery<Merchant> query = em.createQuery("SELECT m FROM Merchant m ORDER BY m.needToSend", Merchant.class);
