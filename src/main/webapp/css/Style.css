@@ -94,12 +94,21 @@ select {
     border: none;
     display: inline-block;
     -webkit-appearance:none;
-    -mz-webkit-appearance:none;
+    -moz-webkit-appearance:none;
     cursor:pointer;
     width: 180px;
 }
 select:hover{
     background: url("arrow_mini_hover.png") no-repeat right #E2EBE1;
+}
+select#transfer{
+    width: 140px;
+    margin: 0;
+}
+input#sum{
+    border-radius: 2px;
+    width: 50px;
+    height: 19px;
 }
 .box{
     margin-bottom: 21px;
@@ -114,7 +123,7 @@ select:hover{
     padding: 4px;
     font-size: 14px;
 }
-.list tr:nth-child(even){
+.list tr.show:nth-child(even){
     background-color: #D5EAEB;
 }
 .list td{
@@ -200,4 +209,22 @@ p#operation{
 p#ok{
     font-size: 16px;
     text-align: center;
+}
+
+.header{
+    font-weight: bold;
+    padding-top: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: #575454;
+}
+.label{
+    color: #575454;
+}
+
+tr.red{
+    background-color: #EDDDDD;
+}
+tr.green{
+    background-color: #E6F0E1;
 }

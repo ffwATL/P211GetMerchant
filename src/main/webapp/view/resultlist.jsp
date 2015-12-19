@@ -66,8 +66,11 @@
                     case "Show Single":
                         transferList = transferService.findByMerchantId(id);
                         break;
+                    case "New Transfer":
+                        response.sendRedirect("transfer.jsp?go=" + go);
+                        break;
                     default:
-                        response.sendRedirect("/page_fail.jsp?go="+go);
+                        response.sendRedirect("/page_fail.jsp?go=" + go);
                         break;
                 }
                 break;
@@ -96,7 +99,7 @@
                 <%
                     if(go.equals("Pay List")){
                         for(PayList p: payListList){
-                            out.println("<tr><td>" + p.getId() + "</td>");
+                            out.println("<tr class=\"show\"><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getMerchantId() + "</td>");
                             out.println("<td>" + p.getPeriod() + "</td>");
                             out.println("<td>" + p.getMinSum() + "</td>");
@@ -105,7 +108,7 @@
                         }
                     }else if(go.equals("Payment")){
                         for(Payment p: paymentList){
-                            out.println("<tr><td>" + p.getId() + "</td>");
+                            out.println("<tr class=\"show\"><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getDt() + "</td>");
                             out.println("<td>" + p.getMerchantId() + "</td>");
                             out.println("<td>" + p.getCustomerId() + "</td>");
@@ -113,9 +116,9 @@
                             out.println("<td>" + p.getSumPayed() + "</td>");
                             out.println("<td>" + p.getChargePayed() + "</td></tr>");
                         }
-                    }else if(go.equals("Transfer Money")){
+                    }else if(go.equals("Transfer Money") && transferList!= null){
                         for (TransferMoney tm: transferList){
-                            out.println("<tr><td>" + tm.getId() + "</td>");
+                            out.println("<tr class=\"show\"><td>" + tm.getId() + "</td>");
                             out.println("<td>" + tm.getMerchantId() + "</td>");
                             out.println("<td>" + tm.getPayListId() + "</td>");
                             out.println("<td>" + tm.getSumSent() + "</td>");

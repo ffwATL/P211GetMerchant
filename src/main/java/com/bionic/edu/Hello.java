@@ -1,6 +1,7 @@
 package com.bionic.edu;
 
 
+import com.bionic.edu.merchant.MerchantService;
 import com.bionic.edu.merchant.paylist.PayList;
 import com.bionic.edu.merchant.paylist.PayListService;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +19,8 @@ public class Hello {
 
     @Inject
     PayListService payListService;
+    @Inject
+    MerchantService merchantService;
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
@@ -26,9 +29,11 @@ public class Hello {
     }
 
     private void showUnpayed(){
-        List<PayList> list = payListService.findUnPayed();
+        List<PayList> list = payListService.findFilteredUnpaid();
         for(PayList p : list){
+            /*Merchant m = merchantService.findById(p.getId());*/
             logger.trace("need to send: " + p.getNeedToSend());
+
         }
     }
 

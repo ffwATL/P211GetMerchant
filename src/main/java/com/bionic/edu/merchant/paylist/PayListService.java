@@ -17,5 +17,7 @@ public interface PayListService {
 
     public List<PayList> updateAll();
 
-    List<PayList> findUnPayed();
+    List<PayList> findUnpaid();
+
+    public List<PayList> findFilteredUnpaid();
 }
