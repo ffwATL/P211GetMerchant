@@ -17,9 +17,9 @@
         if(choice.equals("Add New Payment")){
             Payment p = new Payment();
             Merchant m = merchantService.findById(Integer.valueOf(request.getParameter("merchant")));
-            double sumPayed = Double.valueOf(request.getParameter("price"));
             if(m != null) p.setMerchant(m);
-            else response.sendRedirect("page_fail.jsp");
+            else response.sendRedirect("/page_fail.jsp?go=Payment");
+            double sumPayed = Double.valueOf(request.getParameter("price"));
             p.setGoods(request.getParameter("goods"));
             p.setCustomerId(Integer.valueOf(request.getParameter("customerId")));
             p.setDt(new Timestamp(System.currentTimeMillis()));
@@ -30,10 +30,10 @@
                 merchantService.updateNeedToSend(m.getId(), sumPayed);
                 info = "Payment was successfully added to the DB. Transaction Id: " + p.getId();
             } catch (Exception e) {
-                response.sendRedirect("page_fail.jsp");
+                response.sendRedirect("/page_fail.jsp?go=Payment");
             }
         }
-    }else response.sendRedirect("page_fail.jsp");
+    }else response.sendRedirect("/page_fail.jsp?go="+go);
 %>
 <head>
     <title>Ok</title>

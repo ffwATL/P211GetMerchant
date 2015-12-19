@@ -1,9 +1,7 @@
 package com.bionic.edu.merchant;
 
 import com.bionic.edu.customer.CustomerService;
-import com.bionic.edu.payment.Payment;
 import com.bionic.edu.payment.PaymentService;
-import com.bionic.edu.result.Result;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -32,7 +29,7 @@ public class AppMerchant {
     }
 
     private void getAllPayments(){
-        List<Result> hardList = new ArrayList<>();
+        /*List<Result> hardList = new ArrayList<>();
         for (Merchant m: merchantService.getSortedByNeedToPay()){
            hardList.add(new Result(m.getName(), m.getPayments()));
         }
@@ -41,7 +38,7 @@ public class AppMerchant {
             for(Payment p: r.getPayments()){
                 logger.trace(p.getGoods()+ " " + p.getSumPayed());
             }
-        }
+        }*/
     }
 
     private void getSortedByNeedToPay(){
@@ -64,13 +61,13 @@ public class AppMerchant {
         }
     }
 
-    private void getTotalReport(){
+    /*private void getTotalReport(){
         List<Result> list = merchantService.getTotalReport();
         logger.trace(String.format("%-25s | %-12s |","Name","Sum"));
         logger.trace("------------------------------------");
         for(Result r: list){
             logger.trace(String.format("%-25s | %-6.3f |",r.getName(),r.getSum()));
         }
-    }
+    }*/
 
 }

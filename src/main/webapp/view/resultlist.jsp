@@ -1,5 +1,4 @@
 <%@ page import="com.bionic.edu.merchant.paylist.PayList" %>
-<%@ page import="com.bionic.edu.merchant.paylist.PayListApp" %>
 <%@ page import="com.bionic.edu.merchant.paylist.PayListService" %>
 <%@ page import="com.bionic.edu.payment.Payment" %>
 <%@ page import="com.bionic.edu.payment.PaymentService" %>
@@ -9,54 +8,82 @@
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.bionic.edu.util.ChoiceTemplateTransfer" %>
+<%@ page import="com.bionic.edu.transfer.TransferService" %>
+<%@ page import="com.bionic.edu.transfer.TransferMoney" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%
         ChoiceTemplate choice = null;
-        String from = request.getParameter("go");
+        String go = request.getParameter("go");
         String choiceParam = request.getParameter("choice");
         List<PayList> payListList = null;
         List<Payment> paymentList = null;
+        List<TransferMoney> transferList = null;
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
-        PaymentService paymentService;
-        String idText = request.getParameter("merchant");
         int id = 0;
-        PayListApp payListApp = (PayListApp) context.getBean("payListApp");
-
-        if(idText != null) id = Integer.valueOf(idText);
-        if(from.equals("Payment")) {
-            choice = ChoiceTemplatePayments.getInstance();
-            if(choiceParam.equals("Add New")){
-                response.sendRedirect("addpayment.jsp?go=Payment");
-            }
-            paymentService = (PaymentService) context.getBean("paymentServiceImpl");
-            if(choiceParam.equals("Show All")){
-                paymentList = paymentService.findAll();
-            }else {
-                paymentList = paymentService.findByMerchantId(id);
-            }
-        }else if(from.equals("Pay List")){
-            choice = ChoiceTemplatePayList_.getInstance();
-            if(choiceParam.equals("Show All")) payListList = payListApp.findAll();
-            else if(choiceParam.equals("Show Single")) payListList = payListApp.findByMerchantId(id);
-            else if(choiceParam.equals("Update Single")) {
-                payListApp.add(id);
-                payListList = payListApp.findByMerchantId(id);
-            }else {
-                payListList = payListApp.updateAll();
-            }
-        }else response.sendRedirect("page_fail.jsp");
-
+        if(request.getParameter("merchant") != null) id = Integer.valueOf(request.getParameter("merchant"));
+        switch (go) {
+            case "Payment":
+                choice = ChoiceTemplatePayments.getInstance();
+                if (choiceParam.equals("Add New")) {
+                    response.sendRedirect("addpayment.jsp?go=Payment");
+                }
+                PaymentService paymentService = (PaymentService) context.getBean("paymentServiceImpl");
+                if (choiceParam.equals("Show All")) {
+                    paymentList = paymentService.findAll();
+                } else {
+                    paymentList = paymentService.findByMerchantId(id);
+                }
+                break;
+            case "Pay List":
+                choice = ChoiceTemplatePayList_.getInstance();
+                PayListService  payListService = (PayListService) context.getBean("payListServiceImpl");
+                switch (choiceParam) {
+                    case "Show All":
+                        payListList = payListService.findAll();
+                        break;
+                    case "Show Single":
+                        payListList = payListService.findByMerchantId(id);
+                        break;
+                    case "Update Single":
+                        payListService.add(id);
+                        payListList = payListService.findByMerchantId(id);
+                        break;
+                    default:
+                        payListList = payListService.updateAll();
+                        break;
+                }
+                break;
+            case "Transfer Money":
+                TransferService transferService = (TransferService) context.getBean("transferServiceImpl");
+                choice = ChoiceTemplateTransfer.getInstance();
+                switch (choiceParam){
+                    case "Show All":
+                        transferList = transferService.findAll();
+                        break;
+                    case "Show Single":
+                        transferList = transferService.findByMerchantId(id);
+                        break;
+                    default:
+                        response.sendRedirect("/page_fail.jsp?go="+go);
+                        break;
+                }
+                break;
+            default:
+                response.sendRedirect("/page_fail.jsp?go="+go);
+                break;
+        }
     %>
     <link rel="shortcut icon" href="../../css/icon.png">
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
-    <title><%out.print(from);%></title>
+    <title><%out.print(go);%></title>
 </head>
 <body>
 <div class="container">
     <div class="form">
-        <h3 id="header"><%out.print(from);%></h3>
+        <h3 id="header"><%out.print(go);%></h3>
         <div class="inner">
             <table class="list">
                 <tr>
@@ -67,7 +94,7 @@
                     %>
                 </tr>
                 <%
-                    if(from.equals("Pay List")){
+                    if(go.equals("Pay List")){
                         for(PayList p: payListList){
                             out.println("<tr><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getMerchantId() + "</td>");
@@ -76,7 +103,7 @@
                             out.println("<td>" + p.getNeedToSend() + "</td>");
                             out.println("<td>" + p.getDt() + "</td></tr>");
                         }
-                    }else if(from.equals("Payment")){
+                    }else if(go.equals("Payment")){
                         for(Payment p: paymentList){
                             out.println("<tr><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getDt() + "</td>");
@@ -85,6 +112,14 @@
                             out.println("<td>" + p.getGoods() + "</td>");
                             out.println("<td>" + p.getSumPayed() + "</td>");
                             out.println("<td>" + p.getChargePayed() + "</td></tr>");
+                        }
+                    }else if(go.equals("Transfer Money")){
+                        for (TransferMoney tm: transferList){
+                            out.println("<tr><td>" + tm.getId() + "</td>");
+                            out.println("<td>" + tm.getMerchantId() + "</td>");
+                            out.println("<td>" + tm.getPayListId() + "</td>");
+                            out.println("<td>" + tm.getSumSent() + "</td>");
+                            out.println("<td>" + tm.getDt() + "</td></tr>");
                         }
                     }
                 %>

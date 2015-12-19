@@ -14,4 +14,6 @@ public interface PayListDao {
     public List<PayList> findByMerchantId(int id);
 
     public List<PayList> updateAll();
+
+    List<PayList> findUnPayed();
 }

@@ -52,10 +52,14 @@ public class PayListDaoImpl implements PayListDao {
     @Override
     @Transactional
     public List<PayList> updateAll() {
-        TypedQuery<Merchant> mQuery = em.createQuery("SELECT m FROM Merchant m", Merchant.class);
-        for(Merchant m: mQuery.getResultList()){
-            addPayList(m);
-        }
+        em.clear();
         return findAll();
+    }
+
+    @Override
+    public List<PayList> findUnPayed(){
+        TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p LEFT JOIN TransferMoney tm " +
+                "ON tm.payListId = p.id WHERE tm.payListId IS NULL", PayList.class);
+        return query.getResultList();
     }
 }

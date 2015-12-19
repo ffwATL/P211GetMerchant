@@ -5,16 +5,32 @@
 <%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
+<%@ page import="com.bionic.edu.util.ChoiceTemplateTransfer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%
+        String go = request.getParameter("go");
         ChoiceTemplate choice = null;
-        if(request.getParameter("go").equals("Pay List")){
-            choice = ChoiceTemplatePayList_.getInstance();
-        }else if(request.getParameter("go").equals("Payments") || request.getParameter("go").equals("Payment")){
-            choice = ChoiceTemplatePayments.getInstance();
-        }else response.sendRedirect("page_fail.jsp");
+        switch (go) {
+            case "Pay List":
+                choice = ChoiceTemplatePayList_.getInstance();
+                break;
+            case "Payments":
+            case "Payment":
+                choice = ChoiceTemplatePayments.getInstance();
+                break;
+            case "Transfer Money":
+            case "Money Transfer":
+                choice = ChoiceTemplateTransfer.getInstance();
+                break;
+            case "Home":
+                response.sendRedirect("/index.jsp");
+                break;
+            default:
+                response.sendRedirect("/page_fail.jsp?go=" + go);
+                break;
+        }
         boolean even = (choice.getButtonsAdd().size() + choice.getButtonsShow().size()) % 2 == 0;
     %>
     <title><%out.print(choice.getHeader());%></title>

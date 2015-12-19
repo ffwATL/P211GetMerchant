@@ -31,7 +31,7 @@
                     </form>
                 </tr>
                 <tr>
-                    <form action="view/moneytransfer.jsp" method="get">
+                    <form action="view/choice.jsp" method="get">
                         <td><input type="submit" value="Money Transfer" name="go"></td>
                     </form>
                 </tr>
@@ -43,5 +43,4 @@
     </div>
 </div>
 </body>
-
 </html>

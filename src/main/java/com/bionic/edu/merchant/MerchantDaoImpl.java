@@ -1,6 +1,6 @@
 package com.bionic.edu.merchant;
 
-import com.bionic.edu.result.Result;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,13 +30,13 @@ public class MerchantDaoImpl implements MerchantDao{
 	@Override
 	@Transactional
 	public void remove(int id) {
-		Merchant m = em.find(Merchant.class, id);
+		Merchant m = findById(id);
 		if(m != null) em.remove(m);
 	}
 
 	@Override
 	public void updateAccount(int id, String newAcc) {
-		Merchant m = em.find(Merchant.class, id);
+		Merchant m = findById(id);
 		if(m != null) m.setAccount(newAcc);
 	}
 
@@ -44,14 +44,15 @@ public class MerchantDaoImpl implements MerchantDao{
     @Transactional
     public void updateNeedToSend(int id, double s){
         Merchant m = findById(id);
-        if(m != null) m.setNeedToSend(m.getNeedToSend() + s - m.getCharge());
+        double chargePayed = (m.getCharge() * s) / 100;
+        if(m != null) m.setNeedToSend(s - chargePayed);
     }
 
     @Override
     @Transactional
     public void resetNeedToSend(Merchant m){
-        em.merge(m);
-        m.setNeedToSend(0);
+        Merchant m1 = findById(m.getId());
+        m1.setNeedToSend(0);
     }
 
 	@Override
@@ -60,17 +61,16 @@ public class MerchantDaoImpl implements MerchantDao{
 		return query.getResultList();
 	}
 
-	@Override
+	/*@Override
 	public List<Result> getTotalReport() {
 		StringBuilder builder = new StringBuilder("SELECT new com.bionic.edu.result.Result (m.name, SUM(p.chargePayed))");
 		builder.append("FROM Payment p, Merchant m WHERE m.id = p.merchant.id GROUP BY m.name");
 		TypedQuery<Result> query = em.createQuery(builder.toString(), Result.class);
 		return query.getResultList();
-	}
+	}*/
 
 	@Override
 	public Merchant findById(int id){
 		return em.find(Merchant.class, id);
 	}
-
 }

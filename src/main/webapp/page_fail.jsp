@@ -9,6 +9,8 @@
 <body>
 <% String param = request.getParameter("choice");
     String info = "Something goes wrong..";
+    String go = request.getParameter("go");
+    if(go == null) go = "Home";
     if(param != null){
         if(param.equals("add new payment")){
             info += "Can't add a new payment to the DB. Merchant id: " +request.getParameter("merchant");
@@ -21,13 +23,14 @@
         <h3 id="header">Oops!</h3>
         <div class="inner">
             <table class="input">
-                <td>
-                <td>
-                    <img class="operation" src="../../css/error_red.ico"/>
-                </td>
-                <td>
-                    <p id="operation">Fail :\</p>
-                </td>
+                <tr>
+                    <td>
+                    <td>
+                        <img class="operation" src="../../css/error_red.ico"/>
+                    </td>
+                    <td>
+                        <p id="operation">Fail :\</p>
+                    </td>
                 </tr>
             </table>
             <div class="info">
@@ -37,13 +40,18 @@
             </div>
             <table class="button">
                 <tr>
-                    <td><p><a href="">Home</a></p></td>
-                    <td><p><a href="">Back</a></p></td>
+                    <form id="add" action="/index.jsp" method="get">
+                        <td><input type="submit" value="Home" name="choice"></td>
+                    </form>
+                    <form action="view/choice.jsp" method="get">
+                        <td id="center"><input type="submit" value="Back" name="choice"></td>
+                        <input type="hidden" value="<%out.print(go);%>" name="go">
+                    </form>
                 </tr>
             </table>
         </div>
         <div class="footer">
-            <p id="home"><a href="">Home</a></p>
+            <p id="home"><a href="/index.jsp">Home</a></p>
         </div>
     </div>
 </div>

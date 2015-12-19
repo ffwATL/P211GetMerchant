@@ -7,11 +7,15 @@ import java.util.List;
 
 public interface PayListService {
 
-    public void addPayList(Merchant m);
+    public void add(Merchant m);
+
+    public void add(int merchantId);
 
     public List<PayList> findAll();
 
     public List<PayList> findByMerchantId(int id);
 
     public List<PayList> updateAll();
+
+    List<PayList> findUnPayed();
 }

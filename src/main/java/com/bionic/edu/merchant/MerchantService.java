@@ -1,6 +1,6 @@
 package com.bionic.edu.merchant;
 
-import com.bionic.edu.result.Result;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,8 +19,6 @@ public interface MerchantService {
 
     @Transactional
     public void updateAccount(int id, String newAcc);
-
-    public List<Result> getTotalReport();
 
     public List<Merchant> getSortedByNeedToPay();
 
