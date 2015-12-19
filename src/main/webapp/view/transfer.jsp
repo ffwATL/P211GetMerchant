@@ -11,7 +11,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
-    String table = "";
     String go = request.getParameter("go");
     String choice = request.getParameter("choice");
     String ssum = request.getParameter("sum");
