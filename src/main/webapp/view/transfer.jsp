@@ -15,11 +15,13 @@
     String choice = request.getParameter("choice");
     String ssum = request.getParameter("sum");
     String sAlgorithm = request.getParameter("algorithm");
+    int a = 1;
+    if(sAlgorithm != null) a = Integer.valueOf(sAlgorithm);
     ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
     ChoiceTemplate choiceTransferTemplate = null;
     ChoiceTemplate payListTemplate = ChoiceTemplatePayList_.getInstance();
     PayListService payListService = (PayListService) context.getBean("payListServiceImpl");
-    List<PayList> payListList = payListService.findFilteredUnpaid();
+    List<PayList> payListList = payListService.findFilteredUnpaid(a);
     List<PayList> green = new LinkedList<>();
     List<PayList> red = new LinkedList<>();
     double sum = 0;
@@ -72,7 +74,7 @@
                     }
                 %>
                 <%
-                    if(choice == null){
+                    if(choice == null || choice.equals("Back")){
                         out.println(drawTable(payListList,"show"));
                     }else {
                         out.println(drawTable(green,"green"));
@@ -89,10 +91,11 @@
                         <p class="label">Available sum: </p>
                     </td>
                     <td>
-                        <input id="price" form="add" type="number" name="sum" value="<%if(ssum!=null) out.print(ssum);else out.print(1);%>" min="1" <%if(choice != null) out.print("disabled");%>>
+                        <input id="price" form="add" type="number" name="sum" value="<%if(ssum!=null) out.print(ssum);else out.print(1);%>" min="1"
+                            <%if(choice != null && !choice.equals("Back")) out.print("disabled");%>>
                     </td>
                     <%
-                        if(choice == null){
+                        if(choice == null || choice.equals("Back")){
                             out.println("<td><select id=\"transfer\" form=\"add\" name=\"algorithm\">");
                             out.println("<option value=\"1\">As added</option>");
                             out.println("<option value=\"2\">Low to high</option>");
@@ -103,13 +106,23 @@
             </table>
             <table class="button">
                 <tr>
-                    <form action="choice.jsp" method="get">
+                    <form action="<%if(choice!=null && choice.equals("Next")) out.print("transfer.jsp"); else out.print("choice.jsp");%>" method="post">
                         <td><input type="submit" value="Back" name="choice"></td>
                         <input type="hidden" value="<%out.print(go);%>" name="go">
+                        <input type="hidden" value="<%if(ssum != null) out.print(ssum); else out.print(1); %>" name="sum">
                     </form>
-                    <form id="add" action="transfer.jsp" method="post">
-                        <td id="center"><input class="update" type="submit" value="Next" name="choice"></td>
+                    <form id="add" action="<%if(choice!=null && choice.equals("Next")) out.print("resultlist.jsp");
+                        else out.print("transfer.jsp");%>" method="get">
+                        <td id="center"><input class="update" type="submit" value="<%if(choice!=null && choice.equals("Next")) out.print("Confirm");
+                        else out.print("Next");%>" name="choice"></td>
                         <input type="hidden" value="Transfer Money" name="go">
+                        <%
+                            if(choice != null && choice.equals("Next")){
+                                for(PayList p: green){
+                                    out.print("<input type=\"hidden\" value=\"" + p.getId()+ "\" name=\"id\">");
+                                }
+                            }
+                        %>
                     </form>
                 </tr>
             </table>

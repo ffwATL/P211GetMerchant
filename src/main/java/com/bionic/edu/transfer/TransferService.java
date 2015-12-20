@@ -9,6 +9,8 @@ public interface TransferService {
 
     List<TransferMoney> findAll();
 
-    void doTransfer(double sumAvailable);
+    /*void doTransfer(double sumAvailable);*/
+
+    public void doTransfer(int... id);
 
 }

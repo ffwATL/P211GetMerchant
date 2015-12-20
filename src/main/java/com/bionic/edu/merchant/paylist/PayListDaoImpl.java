@@ -50,6 +50,11 @@ public class PayListDaoImpl implements PayListDao {
     }
 
     @Override
+    public PayList findById(int id) {
+        return em.find(PayList.class, id);
+    }
+
+    @Override
     @Transactional
     public List<PayList> updateAll() {
         em.clear();

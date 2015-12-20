@@ -19,7 +19,7 @@ public class TransferDaoImpl implements TransferDao {
 
     @Override
     public List<TransferMoney> findByMerchantId(int id) {
-        TypedQuery<TransferMoney> query = em.createQuery("SELECT tm FROM TransferMoney tm WHERE tm.id=" + id, TransferMoney.class);
+        TypedQuery<TransferMoney> query = em.createQuery("SELECT tm FROM TransferMoney tm WHERE tm.merchantId=" + id, TransferMoney.class);
         return query.getResultList();
     }
 

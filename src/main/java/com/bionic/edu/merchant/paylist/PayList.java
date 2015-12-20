@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity
-public class PayList {
+public class PayList implements Comparable<PayList>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -75,4 +75,9 @@ public class PayList {
         this.minSum = minSum;
     }
 
+    @Override
+    public int compareTo(PayList o) {
+        if(this.getNeedToSend() > o.getNeedToSend()) return 1;
+        else return this.getNeedToSend() < o.getNeedToSend() ? -1 : 0;
+    }
 }

@@ -1,7 +1,9 @@
 package com.bionic.edu.transfer;
 
+import com.bionic.edu.merchant.MerchantService;
 import com.bionic.edu.merchant.paylist.PayList;
 import com.bionic.edu.merchant.paylist.PayListService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,6 +14,9 @@ import java.util.List;
 public class TransferServiceImpl implements TransferService{
     @Inject
     PayListService payListService;
+
+    @Inject
+    MerchantService merchantService;
 
     @Inject
     TransferDao transferDao;
@@ -26,26 +31,23 @@ public class TransferServiceImpl implements TransferService{
         return transferDao.findAll();
     }
 
-    public void doTransfer(List<PayList> list, int... id){
-        for(int i: id){
-
+    @Override
+    @Transactional
+    public void doTransfer(int... id){
+        for(int a: id){
+            PayList p = payListService.findById(a);
+            save(p);
+            merchantService.findById(p.getMerchantId()).setLastSent(new java.sql.Date(System.currentTimeMillis()));
         }
-
     }
 
-    @Override
-    public void doTransfer(double aSum) {
-        List<PayList> pList = payListService.findUnpaid();
-        for(PayList p: pList){
-            if(p != null &&  aSum >= p.getNeedToSend()){
-                TransferMoney tm = new TransferMoney();
-                tm.setPayListId(p.getId());
-                tm.setMerchantId(p.getMerchantId());
-                tm.setSumSent(p.getNeedToSend());
-                tm.setDt(new Timestamp(System.currentTimeMillis()));
-                transferDao.save(tm);
-                aSum -= p.getNeedToSend();
-            }
-        }
+    @Transactional
+    private void save(PayList p){
+        TransferMoney tm = new TransferMoney();
+        tm.setPayListId(p.getId());
+        tm.setMerchantId(p.getMerchantId());
+        tm.setSumSent(p.getNeedToSend());
+        tm.setDt(new Timestamp(System.currentTimeMillis()));
+        transferDao.save(tm);
     }
 }

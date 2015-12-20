@@ -15,9 +15,11 @@ public interface PayListService {
 
     public List<PayList> findByMerchantId(int id);
 
+    public PayList findById(int id);
+
     public List<PayList> updateAll();
 
     List<PayList> findUnpaid();
 
-    public List<PayList> findFilteredUnpaid();
+    public List<PayList> findFilteredUnpaid(int a);
 }

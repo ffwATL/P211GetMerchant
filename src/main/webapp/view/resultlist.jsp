@@ -60,6 +60,15 @@
                 TransferService transferService = (TransferService) context.getBean("transferServiceImpl");
                 choice = ChoiceTemplateTransfer.getInstance();
                 switch (choiceParam){
+                    case "Confirm":
+                        String[] s = request.getParameterValues("id");
+                        if(s!=null){
+                            int[] arr = new int [s.length];
+                            for(int i=0; i< arr.length; i++){
+                                arr[i] = Integer.valueOf(s[i]);
+                            }
+                            transferService.doTransfer(arr);
+                        }
                     case "Show All":
                         transferList = transferService.findAll();
                         break;
@@ -116,7 +125,7 @@
                             out.println("<td>" + p.getSumPayed() + "</td>");
                             out.println("<td>" + p.getChargePayed() + "</td></tr>");
                         }
-                    }else if(go.equals("Transfer Money") && transferList!= null){
+                    }else if(go.equals("Transfer Money") && transferList != null){
                         for (TransferMoney tm: transferList){
                             out.println("<tr class=\"show\"><td>" + tm.getId() + "</td>");
                             out.println("<td>" + tm.getMerchantId() + "</td>");
