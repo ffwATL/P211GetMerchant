@@ -41,6 +41,13 @@
 <div class="container">
     <div class="form">
         <h3 id="header"><%out.print(choice.getHeader());%></h3>
+        <div class="navside">
+            <ul>
+                <li><a class="leftLink" href="choice.jsp?go=Payment"><p>Payments</p></a></li>
+                <li><a class="leftLink" href="choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
+                <li><a class="leftLink" href="choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>
+            </ul>
+        </div>
         <div class="inner">
             <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
                 MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");

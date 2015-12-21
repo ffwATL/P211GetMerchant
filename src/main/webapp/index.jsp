@@ -15,27 +15,13 @@
 <div class="container">
     <div class="form">
         <h3 id="header">Getting started</h3>
-        <div class="inner">
-            <table class="button">
-                <tr>
-                    <th><p>Choose Your Destiny</p></th>
-                </tr>
-                <tr>
-                    <form action="view/choice.jsp" method="get">
-                        <td><input type="submit" value="Payments" name="go"></td>
-                    </form>
-                </tr>
-                <tr>
-                    <form action="view/choice.jsp" method="get">
-                        <td><input type="submit" value="Pay List" name="go"></td>
-                    </form>
-                </tr>
-                <tr>
-                    <form action="view/choice.jsp" method="get">
-                        <td><input type="submit" value="Money Transfer" name="go"></td>
-                    </form>
-                </tr>
-            </table>
+        <div class="inner1">
+            <p id="index">Choose Your Destiny</p>
+            <ul>
+                <li><a class="leftLink" href="view/choice.jsp?go=Payment"><p>Payments</p></a></li>
+                <li><a class="leftLink" href="view/choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
+                <li><a class="leftLink" href="view/choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>
+            </ul>
         </div>
         <div class="footer">
             <p>.</p>
