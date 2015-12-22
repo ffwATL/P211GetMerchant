@@ -79,7 +79,7 @@ public class PayListServiceImpl implements PayListService{
         for(int i=0; i<list.size(); i++){
             PayList p = list.get(i);
             Merchant m = merchantService.findById(p.getMerchantId());
-            if(m.getLastSent() != null ){
+            if(m.getLastSent() != null){
                 if(!validatePeriod(m.getLastSent(), p.getPeriod())) list.remove(p);
             }
         }

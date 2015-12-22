@@ -62,9 +62,9 @@
                 switch (choiceParam){
                     case "Confirm":
                         String[] s = request.getParameterValues("id");
-                        if(s!=null){
+                        if(s != null){
                             int[] arr = new int [s.length];
-                            for(int i=0; i< arr.length; i++){
+                            for(int i=0; i < arr.length; i++){
                                 arr[i] = Integer.valueOf(s[i]);
                             }
                             transferService.doTransfer(arr);

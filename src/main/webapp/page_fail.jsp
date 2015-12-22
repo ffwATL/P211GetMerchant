@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,6 +20,13 @@
 <div class="container">
     <div class="form">
         <h3 id="header">Oops!</h3>
+        <div class="navside">
+            <ul>
+                <li><a class="leftLink" href="view/choice.jsp?go=Payment"><p>Payments</p></a></li>
+                <li><a class="leftLink" href="view/choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
+                <li><a class="leftLink" href="view/choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>
+            </ul>
+        </div>
         <div class="inner">
             <table class="input">
                 <tr>

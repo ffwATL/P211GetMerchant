@@ -12,7 +12,9 @@ public class ChoiceTemplateTransfer implements ChoiceTemplate{
 
     private static List<String> buttonsAdd = new LinkedList<>();
 
-    private static final String info = "Some very important info will be here..";
+    private static final String info = "Choose 'Show All' to see all the paylists were proceeded for all the merchants." +
+            " 'Show Single' shows you all the same but only for merchant you choose from list above. To make a new transfer due to the " +
+            "terms and conditions click on 'New Transfer'";
 
     private static final String HEADER = "Transfer Money";
 

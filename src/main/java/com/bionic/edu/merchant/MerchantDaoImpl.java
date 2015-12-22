@@ -61,14 +61,6 @@ public class MerchantDaoImpl implements MerchantDao{
 		return query.getResultList();
 	}
 
-	/*@Override
-	public List<Result> getTotalReport() {
-		StringBuilder builder = new StringBuilder("SELECT new com.bionic.edu.result.Result (m.name, SUM(p.chargePayed))");
-		builder.append("FROM Payment p, Merchant m WHERE m.id = p.merchant.id GROUP BY m.name");
-		TypedQuery<Result> query = em.createQuery(builder.toString(), Result.class);
-		return query.getResultList();
-	}*/
-
 	@Override
 	public Merchant findById(int id){
 		return em.find(Merchant.class, id);
