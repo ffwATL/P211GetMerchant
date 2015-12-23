@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class PayListDaoImpl implements PayListDao {
     @PersistenceContext
     private EntityManager em;
@@ -22,13 +23,11 @@ public class PayListDaoImpl implements PayListDao {
 
     @Override
     @Transactional
-    public void addPayList(Merchant m) {
-        PayList p = PayList.getInstance();
-        p.setMerchantId(m.getId());
-        p.setMinSum(m.getMinSum());
-        p.setPeriod(m.getPeriod());
-        p.setNeedToSend(m.getNeedToSend());
-        p.setDt(new Date(System.currentTimeMillis()));
+    public void addPayList(PayList p) {
+        Merchant m = em.find(Merchant.class, p.getMerchantId());
+        m.setLastSent(new Date(System.currentTimeMillis()));
+        m.setSent(m.getSent() + p.getNeedToSend());
+        m.setNeedToSend(0);
         em.persist(p);
     }
 
@@ -57,8 +56,12 @@ public class PayListDaoImpl implements PayListDao {
     @Override
     @Transactional
     public List<PayList> updateAll() {
-        em.clear();
         return findAll();
+    }
+
+    @Override
+    public void clearCache(){
+        em.clear();
     }
 
     @Override

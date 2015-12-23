@@ -26,6 +26,9 @@ public interface MerchantService {
     public void updateNeedToSend(int id, double s);
 
     @Transactional
+    public void updateSent(Merchant m, double sum);
+
+    @Transactional
     public void resetNeedToSend(Merchant m);
 
 }

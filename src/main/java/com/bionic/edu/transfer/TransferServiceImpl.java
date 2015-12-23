@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 @Named
@@ -37,7 +37,7 @@ public class TransferServiceImpl implements TransferService{
         for(int a: id){
             PayList p = payListService.findById(a);
             save(p);
-            merchantService.findById(p.getMerchantId()).setLastSent(new java.sql.Date(System.currentTimeMillis()));
+           /* merchantService.findById(p.getMerchantId()).setLastSent(new java.sql.Date(System.currentTimeMillis()));*/
         }
     }
 
@@ -47,7 +47,7 @@ public class TransferServiceImpl implements TransferService{
         tm.setPayListId(p.getId());
         tm.setMerchantId(p.getMerchantId());
         tm.setSumSent(p.getNeedToSend());
-        tm.setDt(new Timestamp(System.currentTimeMillis()));
+        tm.setDt(new Date(System.currentTimeMillis()));
         transferDao.save(tm);
     }
 }

@@ -24,9 +24,11 @@ public interface MerchantDao {
 	public List<Merchant> getSortedByNeedToPay();
 
     @Transactional
-    public void updateNeedToSend(int id, double s);
+    void updateMerchant(Merchant m);
 
     @Transactional
     public void resetNeedToSend(Merchant m);
+
+    public void updateSent(Merchant m, double sum);
 
 }

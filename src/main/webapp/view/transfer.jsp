@@ -12,7 +12,7 @@
 <%
     String go = request.getParameter("go");
     String choice = request.getParameter("choice");
-    String ssum = request.getParameter("sum");
+    String sumString = request.getParameter("sum");
     String sAlgorithm = request.getParameter("algorithm");
     int a = 1;
     if(sAlgorithm != null) a = Integer.valueOf(sAlgorithm);
@@ -20,21 +20,18 @@
     ChoiceTemplate choiceTransferTemplate = null;
     ChoiceTemplate payListTemplate = ChoiceTemplatePayList_.getInstance();
     PayListService payListService = (PayListService) context.getBean("payListServiceImpl");
-    List<PayList> payListList = payListService.findFilteredUnpaid(a);
+    List<PayList> payListList = payListService.findUnpaid();
     List<PayList> green = new LinkedList<>();
     List<PayList> red = new LinkedList<>();
     double sum = 0;
-    if(go != null && go.equals("Money Transfer") || go.equals("Transfer Money")){
+    if(go != null && go.equals("Money Transfer") || go != null && go.equals("Transfer Money")){
         choiceTransferTemplate = ChoiceTemplateTransfer.getInstance();
     }else response.sendRedirect("/page_fail.jsp?go=" + go);
     if(choice != null && choice.equals("Next")){
-        if(ssum != null) sum = Double.valueOf(ssum);
-        for(PayList p: payListList){
-            if(sum >= p.getNeedToSend()){
-                green.add(p);
-                sum -= p.getNeedToSend();
-            } else red.add(p);
-        }
+        if(sumString != null) sum = Double.valueOf(sumString);
+        List<List<PayList>> greenRedFiltered = payListService.getGreenRedFiltered(payListList, sum);
+        green = greenRedFiltered.get(0);
+        red = greenRedFiltered.get(1);
     }
 %>
 <head>
@@ -97,7 +94,7 @@
                         <p class="label">Available sum: </p>
                     </td>
                     <td>
-                        <input id="price" form="add" type="number" name="sum" value="<%if(ssum!=null) out.print(ssum);else out.print(1);%>" min="1"
+                        <input id="price" form="add" type="number" name="sum" value="<%if(sumString!=null) out.print(sumString);else out.print(1);%>" min="1"
                             <%if(choice != null && !choice.equals("Back")) out.print("disabled");%>>
                     </td>
                     <%
@@ -115,7 +112,7 @@
                     <form action="<%if(choice!=null && choice.equals("Next")) out.print("transfer.jsp"); else out.print("choice.jsp");%>" method="post">
                         <td><input type="submit" value="Back" name="choice"></td>
                         <input type="hidden" value="<%out.print(go);%>" name="go">
-                        <input type="hidden" value="<%if(ssum != null) out.print(ssum); else out.print(1); %>" name="sum">
+                        <input type="hidden" value="<%if(sumString != null) out.print(sumString); else out.print(1); %>" name="sum">
                     </form>
                     <form id="add" action="<%if(choice!=null && choice.equals("Next")) out.print("resultlist.jsp");
                         else out.print("transfer.jsp");%>" method="get">

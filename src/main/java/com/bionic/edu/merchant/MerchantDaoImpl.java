@@ -7,9 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class MerchantDaoImpl implements MerchantDao{
 	
 	@PersistenceContext
@@ -42,20 +44,27 @@ public class MerchantDaoImpl implements MerchantDao{
 
     @Override
     @Transactional
-    public void updateNeedToSend(int id, double s){
-        Merchant m = findById(id);
-        double chargePayed = (m.getCharge() * s) / 100;
-        if(m != null) m.setNeedToSend(s - chargePayed);
+    public void updateMerchant(Merchant m){
+        em.merge(m);
     }
 
     @Override
     @Transactional
     public void resetNeedToSend(Merchant m){
-        Merchant m1 = findById(m.getId());
-        m1.setNeedToSend(0);
+        m.setLastSent(new Date(System.currentTimeMillis()));
+        m.setNeedToSend(0);
     }
 
-	@Override
+    @Override
+    @Transactional
+    public void updateSent(Merchant m, double sum) {
+        m.setLastSent(new Date(System.currentTimeMillis()));
+        m.setSent(sum);
+        m.setNeedToSend(0);
+        em.merge(m);
+    }
+
+    @Override
 	public List<Merchant> getSortedByNeedToPay(){
 		TypedQuery<Merchant> query = em.createQuery("SELECT m FROM Merchant m ORDER BY m.needToSend", Merchant.class);
 		return query.getResultList();

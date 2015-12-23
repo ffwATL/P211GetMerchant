@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.sql.Date;
 import java.util.List;
 
 @Named
@@ -47,13 +48,22 @@ public class MerchantServiceImpl implements MerchantService{
     @Override
     @Transactional
     public void updateNeedToSend(int id, double s) {
-        merchantDao.updateNeedToSend(id, s);
+        Merchant m = findById(id);
+        m.setNeedToSend(m.getNeedToSend() + s - ((m.getCharge() * s) / 100));
+    }
+
+    @Override
+    @Transactional
+    public void updateSent(Merchant m, double sum) {
+        m.setLastSent(new Date(System.currentTimeMillis()));
+        m.setSent(sum);
+        m.setNeedToSend(0);
+        merchantDao.updateMerchant(m);
     }
 
     @Override
     public void resetNeedToSend(Merchant m) {
         merchantDao.resetNeedToSend(m);
     }
-
 
 }

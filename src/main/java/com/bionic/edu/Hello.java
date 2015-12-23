@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.time.LocalDate;
 import java.util.List;
 
 @Named
@@ -26,11 +27,16 @@ public class Hello {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Hello app = (Hello) context.getBean("hello");
-        app.doTransfer(12);
+        LocalDate dt = LocalDate.now();
+        LocalDate dt2 = LocalDate.now();
+        /*dt.plusWeeks(2);*/
+        logger.trace(dt2.isAfter(dt));
+        logger.trace(dt2.compareTo(dt));
+        /*app.doTransfer(12);*/
     }
 
     private void showUnpayed(){
-        List<PayList> list = payListService.findFilteredUnpaid(0);
+        List<PayList> list = payListService.findAll();
         for(PayList p : list){
             /*Merchant m = merchantService.findById(p.getId());*/
             logger.trace("need to send: " + p.getNeedToSend());

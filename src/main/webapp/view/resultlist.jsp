@@ -52,7 +52,8 @@
                         payListList = payListService.findByMerchantId(id);
                         break;
                     default:
-                        payListList = payListService.updateAll();
+                        payListService.updateAll();
+                        payListList = payListService.findAll();
                         break;
                 }
                 break;

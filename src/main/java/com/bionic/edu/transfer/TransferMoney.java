@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 public class TransferMoney {
@@ -19,7 +19,7 @@ public class TransferMoney {
 
     private double sumSent;
 
-    private Timestamp dt;
+    private Date dt;
 
     public int getId() {
         return id;
@@ -53,13 +53,12 @@ public class TransferMoney {
         this.sumSent = sumSent;
     }
 
-    public Timestamp getDt() {
+    public Date getDt() {
         return dt;
     }
 
-    public void setDt(Timestamp dt) {
+    public void setDt(Date dt) {
         this.dt = dt;
     }
-
 
 }

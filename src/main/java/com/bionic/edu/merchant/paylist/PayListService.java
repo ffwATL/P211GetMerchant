@@ -17,9 +17,11 @@ public interface PayListService {
 
     public PayList findById(int id);
 
-    public List<PayList> updateAll();
+    public void updateAll();
 
     List<PayList> findUnpaid();
 
     public List<PayList> findFilteredUnpaid(int a);
+
+    public List<List<PayList>> getGreenRedFiltered(List<PayList> payListList, double sum);
 }

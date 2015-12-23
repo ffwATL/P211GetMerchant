@@ -17,30 +17,23 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class PaymentDaoImpl implements PaymentDao{
+@Transactional(readOnly = true)
+public class PaymentDaoImpl implements PaymentDao {
 
     @PersistenceContext
     private EntityManager em;
     private static Logger logger = LogManager.getLogger();
 
     @Override
-        public List<Payment> findAll(){
-        TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p", Payment.class);
-        return query.getResultList();
+    public List<Payment> findAll() {
+        return em.createQuery("SELECT p FROM Payment p", Payment.class).getResultList();
     }
+
 
     @Transactional
     @Override
     public void save(Payment p) throws GetMerchantException {
-        if(em.find(Customer.class, p.getCustomerId()) != null){
-            if(em.find(Merchant.class, p.getMerchantId()) != null){
-                if(p.getSumPayed() < 0) throw new GetMerchantException("sum payed can't be less than 0");
-                em.persist(p);
-            }
-            else throw new NoSuchMerchantException("No such merchant Exception! Wrong Id given: " + p.getMerchantId());
-        } else {
-            throw new NoSuchCustomerException("No such customer Exception! Wrong customer Id given: " + p.getCustomerId());
-        }
+        em.persist(p);
     }
 
     @Override
@@ -51,11 +44,11 @@ public class PaymentDaoImpl implements PaymentDao{
 
     @Override
     public List<Payment> findByMerchantId(int id) {
-        TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchant.id="+id,Payment.class);
+        TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchant.id=" + id, Payment.class);
         return query.getResultList();
     }
 
-    public Payment findById(int id){
+    public Payment findById(int id) {
         return em.find(Payment.class, id);
     }
 }
