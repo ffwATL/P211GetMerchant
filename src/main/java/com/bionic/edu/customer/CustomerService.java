@@ -14,9 +14,6 @@ public interface CustomerService {
     @Transactional
     public void save(Customer c);
 
-    @Transactional
-    public void remove(int id);
-
     public List<String> getNames(double sumPayed);
 
 }

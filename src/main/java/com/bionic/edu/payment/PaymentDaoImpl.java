@@ -1,11 +1,6 @@
 package com.bionic.edu.payment;
 
 
-import com.bionic.edu.GetMerchantException;
-import com.bionic.edu.customer.Customer;
-import com.bionic.edu.customer.NoSuchCustomerException;
-import com.bionic.edu.merchant.Merchant;
-import com.bionic.edu.merchant.NoSuchMerchantException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -32,7 +27,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Transactional
     @Override
-    public void save(Payment p) throws GetMerchantException {
+    public void save(Payment p) {
         em.persist(p);
     }
 

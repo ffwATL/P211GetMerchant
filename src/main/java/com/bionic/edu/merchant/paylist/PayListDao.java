@@ -13,9 +13,6 @@ public interface PayListDao {
 
     public PayList findById(int id);
 
-    public List<PayList> updateAll();
-
     List<PayList> findUnPayed();
 
-    public void clearCache();
 }

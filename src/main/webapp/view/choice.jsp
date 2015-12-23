@@ -68,6 +68,7 @@
             <div class="info">
                 <p><%out.print(choice.getInfoText());%></p>
             </div>
+            <hr>
             <table class="button">
                 <tr>
                     <form id="one" action="resultlist.jsp" method="post">

@@ -1,22 +1,18 @@
 package com.bionic.edu.transfer;
 
-import com.bionic.edu.merchant.MerchantService;
 import com.bionic.edu.merchant.paylist.PayList;
 import com.bionic.edu.merchant.paylist.PayListService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Named
 public class TransferServiceImpl implements TransferService{
     @Inject
     PayListService payListService;
-
-    @Inject
-    MerchantService merchantService;
 
     @Inject
     TransferDao transferDao;
@@ -35,9 +31,7 @@ public class TransferServiceImpl implements TransferService{
     @Transactional
     public void doTransfer(int... id){
         for(int a: id){
-            PayList p = payListService.findById(a);
-            save(p);
-           /* merchantService.findById(p.getMerchantId()).setLastSent(new java.sql.Date(System.currentTimeMillis()));*/
+            save(payListService.findById(a));
         }
     }
 
@@ -47,7 +41,7 @@ public class TransferServiceImpl implements TransferService{
         tm.setPayListId(p.getId());
         tm.setMerchantId(p.getMerchantId());
         tm.setSumSent(p.getNeedToSend());
-        tm.setDt(new Date(System.currentTimeMillis()));
+        tm.setDt(new Timestamp(System.currentTimeMillis()));
         transferDao.save(tm);
     }
 }

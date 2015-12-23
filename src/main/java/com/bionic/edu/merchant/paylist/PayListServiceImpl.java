@@ -55,7 +55,12 @@ public class PayListServiceImpl implements PayListService{
 
     @Override
     public List<PayList> findByMerchantId(int id) {
-        return payListDao.findByMerchantId(id);
+        try {
+            return payListDao.findByMerchantId(id);
+        }catch (javax.persistence.NoResultException e){
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -65,10 +70,9 @@ public class PayListServiceImpl implements PayListService{
 
     @Override
     public void updateAll() {
-        /*payListDao.updateAll();*/
         merchantService.findAll().forEach(this :: add);
-        /*return findAll();*/
     }
+
     @Override
     public List<PayList> findUnpaid() {
         return payListDao.findUnPayed();
@@ -76,7 +80,15 @@ public class PayListServiceImpl implements PayListService{
 
     @Override
     public List<PayList> findFilteredUnpaid(int a){
-        return sortList(a);
+        List<PayList> list = findUnpaid();
+        if(a == 1) return list;
+        if(a == 2) Collections.sort(list);
+        else if(a == 3) {
+            Collections.sort(list);
+            Collections.reverse(list);
+        }
+        validateByPeriod(list);
+        return list;
     }
 
     @Override
@@ -93,17 +105,6 @@ public class PayListServiceImpl implements PayListService{
             } else red.add(p);
         }
         return result;
-    }
-
-    private List<PayList> sortList(int a){
-        List<PayList> list = findUnpaid();
-        if(a == 2) Collections.sort(list);
-        else if(a == 3) {
-            Collections.sort(list);
-            Collections.reverse(list);
-        }
-        validateByPeriod(list);
-        return list;
     }
 
     private void validateByPeriod(List<PayList> list){

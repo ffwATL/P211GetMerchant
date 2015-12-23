@@ -21,6 +21,9 @@ public class PayList implements Comparable<PayList>{
 
     private java.sql.Date dt;
 
+    private double needToSend;
+
+
     public double getNeedToSend() {
         return needToSend;
     }
@@ -36,8 +39,6 @@ public class PayList implements Comparable<PayList>{
     public void setNeedToSend(double needToSend) {
         this.needToSend = needToSend;
     }
-
-    private double needToSend;
 
     public static PayList getInstance(){
         return new PayList();

@@ -20,7 +20,7 @@
     ChoiceTemplate choiceTransferTemplate = null;
     ChoiceTemplate payListTemplate = ChoiceTemplatePayList_.getInstance();
     PayListService payListService = (PayListService) context.getBean("payListServiceImpl");
-    List<PayList> payListList = payListService.findUnpaid();
+    List<PayList> payListList = payListService.findFilteredUnpaid(a);
     List<PayList> green = new LinkedList<>();
     List<PayList> red = new LinkedList<>();
     double sum = 0;
@@ -107,6 +107,7 @@
                     %>
                 </tr>
             </table>
+            <hr>
             <table class="button">
                 <tr>
                     <form action="<%if(choice!=null && choice.equals("Next")) out.print("transfer.jsp"); else out.print("choice.jsp");%>" method="post">

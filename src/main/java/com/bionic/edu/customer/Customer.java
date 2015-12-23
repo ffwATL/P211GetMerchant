@@ -88,9 +88,4 @@ public class Customer {
         this.maturity = maturity;
     }
 
-    @Override
-    public String toString(){
-        return getId() + " " + getName();
-    }
-
 }

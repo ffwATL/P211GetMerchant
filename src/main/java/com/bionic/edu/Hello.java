@@ -27,6 +27,7 @@ public class Hello {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         Hello app = (Hello) context.getBean("hello");
+
         LocalDate dt = LocalDate.now();
         LocalDate dt2 = LocalDate.now();
         /*dt.plusWeeks(2);*/

@@ -1,42 +1,27 @@
+<%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page import="com.bionic.edu.merchant.MerchantService" %>
 <%@ page import="com.bionic.edu.payment.Payment" %>
 <%@ page import="com.bionic.edu.payment.PaymentService" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
     PaymentService paymentService = (PaymentService) context.getBean("paymentServiceImpl");
-    MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
     String choice = request.getParameter("choice");
     String go = request.getParameter("go");
     String info = "";
     if(choice != null){
         if(choice.equals("Add New Payment")){
-            Payment p = new Payment();
-            Merchant m = merchantService.findById(Integer.valueOf(request.getParameter("merchant")));
-            if(m != null) p.setMerchant(m);
-            else response.sendRedirect("/page_fail.jsp?go=Payment");
-            double sumPayed = Double.valueOf(request.getParameter("price"));
-            p.setGoods(request.getParameter("goods"));
-            p.setCustomerId(Integer.valueOf(request.getParameter("customerId")));
-            p.setDt(new Timestamp(System.currentTimeMillis()));
-            p.setSumPayed(sumPayed);
-            p.setChargePayed((m.getCharge() * sumPayed) / 100);
-            try {
-                paymentService.save(p);
-                merchantService.updateNeedToSend(m.getId(), sumPayed);
-                info = "Payment was successfully added to the DB. Transaction Id: " + p.getId();
-            } catch (Exception e) {
-                response.sendRedirect("/page_fail.jsp?go=Payment");
-            }
+            paymentService.save(Integer.valueOf(request.getParameter("merchant")),
+                    Integer.valueOf(request.getParameter("customerId")), Double.valueOf(request.getParameter("price")), request.getParameter("goods"));
+            info = "Payment was successfully added to the DB =)";
         }
-    }else response.sendRedirect("/page_fail.jsp?go="+go);
+    }else response.sendRedirect("/page_fail.jsp?go=" + go);
 %>
 <head>
-    <title>Ok</title>
+    <title>CM</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
     <meta http-equiv="refresh" content="5;url=choice.jsp?go=<%out.print(go);%>" />
@@ -69,6 +54,7 @@
                     <% out.print(info); %>
                 </p>
             </div>
+            <hr>
             <table class="button">
                 <tr>
                     <form id="add" action="/index.jsp" method="get">

@@ -63,6 +63,7 @@
                     </td>
                 </tr>
             </table>
+            <hr>
             <table class="button">
                 <tr>
                     <form action="choice.jsp" method="get">

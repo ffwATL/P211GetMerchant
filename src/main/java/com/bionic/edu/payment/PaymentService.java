@@ -1,20 +1,14 @@
 package com.bionic.edu.payment;
 
 
-import com.bionic.edu.GetMerchantException;
-
 import java.util.List;
 
 public interface PaymentService {
 
-    public List<Payment> findAll();
+    List<Payment> findAll();
 
-    public Payment findById(int id);
+    List<Payment> findByMerchantId(int id);
 
-    public void save(Payment p) throws GetMerchantException;
-
-    public double getPaymentSum();
-
-    public List<Payment> findByMerchantId(int id);
+    void save(int merchantId, int customerId, double sumPayed, String goods);
 
 }

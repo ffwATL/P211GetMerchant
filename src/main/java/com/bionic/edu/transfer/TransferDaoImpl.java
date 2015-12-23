@@ -16,17 +16,14 @@ public class TransferDaoImpl implements TransferDao {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     public List<TransferMoney> findByMerchantId(int id) {
-        TypedQuery<TransferMoney> query = em.createQuery("SELECT tm FROM TransferMoney tm WHERE tm.merchantId=" + id, TransferMoney.class);
-        return query.getResultList();
+        return em.createQuery("SELECT tm FROM TransferMoney tm WHERE tm.merchantId=:merchantId", TransferMoney.class).setParameter("merchantId",id).getResultList();
     }
 
     @Override
     public List<TransferMoney> findAll() {
-        TypedQuery<TransferMoney> query = em.createQuery("SELECT tm FROM TransferMoney tm", TransferMoney.class);
-        return query.getResultList();
+        return em.createQuery("SELECT tm FROM TransferMoney tm", TransferMoney.class).getResultList();
     }
 
     @Override
@@ -34,6 +31,5 @@ public class TransferDaoImpl implements TransferDao {
     public void save(TransferMoney tm) {
         em.persist(tm);
     }
-
 
 }

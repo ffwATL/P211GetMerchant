@@ -44,6 +44,7 @@
                     <% out.print(info); %>
                 </p>
             </div>
+            <hr>
             <table class="button">
                 <tr>
                     <form id="add" action="/index.jsp" method="get">

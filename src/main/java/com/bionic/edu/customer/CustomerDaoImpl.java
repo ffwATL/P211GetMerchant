@@ -21,7 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> findAll() {
-        TypedQuery<Customer> tq = em.createQuery("SELECT c FROM Customer c",Customer.class);
+        TypedQuery<Customer> tq = em.createQuery("SELECT c FROM Customer c", Customer.class);
         return tq.getResultList();
     }
 
@@ -40,11 +40,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<String> getNames(double sumPayed) {
-        String txt = "SELECT DISTINCT c.name FROM ";
-        txt += "Payment p, Customer c ";
-        txt += "WHERE c.id = p.customerId AND p.sumPayed > :sumPayed";
-        TypedQuery<String> query = em.createQuery(txt, String.class);
-        query.setParameter("sumPayed",sumPayed);
-        return query.getResultList();
+        return em.createQuery("SELECT DISTINCT c.name FROM Payment p, Customer c WHERE c.id = p.customerId AND" +
+                " p.sumPayed > :sumPayed", String.class).setParameter("sumPayed",sumPayed).getResultList();
     }
 }

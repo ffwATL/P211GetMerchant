@@ -16,7 +16,6 @@ public class Payment {
     private String goods;
     private java.sql.Timestamp dt;
     private int customerId;
-    /*private int merchantId;*/
 
     @ManyToOne
     @JoinColumn(name = "merchantId")
@@ -79,10 +78,5 @@ public class Payment {
     }
     public int getMerchantId(){
         return merchant != null ? merchant.getId() : 0;
-    }
-
-    @Override
-    public String toString(){
-        return " " + getSumPayed();
     }
 }

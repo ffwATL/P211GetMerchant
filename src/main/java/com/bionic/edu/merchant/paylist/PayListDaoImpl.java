@@ -33,13 +33,13 @@ public class PayListDaoImpl implements PayListDao {
 
     @Override
     public List<PayList> findAll() {
-        TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p", PayList.class);
-        return query.getResultList();
+        return em.createQuery("SELECT p FROM PayList p", PayList.class).getResultList();
     }
 
     @Override
     public List<PayList> findByMerchantId(int id) {
-        TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p WHERE p.merchantId =" + id, PayList.class);
+        TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p WHERE " +
+                "p.merchantId=:merchantId", PayList.class).setParameter("merchantId", id);
         try {
             return query.getResultList();
         }catch (javax.persistence.NoResultException e){
@@ -54,20 +54,8 @@ public class PayListDaoImpl implements PayListDao {
     }
 
     @Override
-    @Transactional
-    public List<PayList> updateAll() {
-        return findAll();
-    }
-
-    @Override
-    public void clearCache(){
-        em.clear();
-    }
-
-    @Override
     public List<PayList> findUnPayed(){
-        TypedQuery<PayList> query = em.createQuery("SELECT p FROM PayList p LEFT JOIN TransferMoney tm " +
-                "ON tm.payListId = p.id WHERE tm.payListId IS NULL", PayList.class);
-        return query.getResultList();
+        return em.createQuery("SELECT p FROM PayList p LEFT JOIN TransferMoney tm " +
+                "ON tm.payListId = p.id WHERE tm.payListId IS NULL", PayList.class).getResultList();
     }
 }
