@@ -135,9 +135,9 @@
                         <input type="hidden" value="<%if(sumString != null) out.print(sumString); else out.print(1); %>" name="sum">
                     </form>
                     <form id="add" action="<%if(choice!=null && choice.equals("Next")) out.print("resultlist.jsp");
-                        else out.print("transfer.jsp");%>" method="get">
+                        else out.print("transfer.jsp");%>" method="post">
                         <td id="center"><input class="update" type="submit" value="<%if(choice!=null && choice.equals("Next")) out.print("Confirm");
-                        else out.print("Next");%>" name="choice"></td>
+                        else out.print("Next");%>" name="choice" <%if(payListList == null || payListList.size()==0) out.print("disabled");%>></td>
                         <input type="hidden" value="Transfer Money" name="go">
                         <%
                             if(choice != null && choice.equals("Next")){

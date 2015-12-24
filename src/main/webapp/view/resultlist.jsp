@@ -155,13 +155,15 @@
                         <td><input type="submit" value="Back"></td>
                         <input type="hidden" value="<%if(choice != null) out.print(choice.getHeader());%>" name="go">
                     </form>
-                    <form action="<%if(go.equals("Pay List")) out.print("choice.jsp");
+                    <form action="<%if(go.equals("Pay List") || go.equals("Payment")) out.print("choice.jsp");
                         else out.print("/index.jsp");%>" method="get">
-                        <td id="center"><input <%if(go.equals("Pay List"))out.print("class=\"update\"");%>type="submit" value=
-                        <%if(go.equals("Pay List"))out.print("Next"); else out.print("Home");%>></td>
+                        <td id="center"><input <%if(go.equals("Pay List") || go.equals("Payment"))out.print("class=\"update\"");%>type="submit" value=
+                        <%if(go.equals("Pay List") || go.equals("Payment"))out.print("Next"); else out.print("Home");%>></td>
                         <%
                             if(go.equals("Pay List")){
                                 out.print("<input type=\"hidden\" value=\"Transfer Money\" name=\"go\">");
+                            }else if(go.equals("Payment")){
+                                out.print("<input type=\"hidden\" value=\"Pay List\" name=\"go\">");
                             }
                         %>
                     </form>

@@ -200,8 +200,6 @@ input#price, #priceCalc {
     width: 70px;
 }
 
-
-
 input#goods {
     width: 200px;
 }
@@ -223,6 +221,10 @@ input#goods {
     font-size: 13px;
     padding-right: 6px;
     padding-left: 6px;
+}
+input.update:disabled, input.update:disabled:hover{
+    background-color: rgba(194, 107, 70, 0.5);
+    box-shadow: none;
 }
 input.update{
     background-color: #C26B46;

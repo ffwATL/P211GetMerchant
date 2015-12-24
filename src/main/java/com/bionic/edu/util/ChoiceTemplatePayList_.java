@@ -12,10 +12,10 @@ public class ChoiceTemplatePayList_ implements ChoiceTemplate {
 
     private static List<String> buttonsAdd = new LinkedList<>();
 
-    private static String info ="Select merchant from list above and click 'Show One' to view pay list " +
-            "for only one merchant. Click 'Generate New' if you want to add a new list for chosen merchant. " +
-            "If list is already exist for current, merchant it will be updated due to the DB data. Chose 'Show All' " +
-            "if you want to view pay list for every merchant.";
+    private static String info ="Select merchant from list above and click 'Show Single' to view pay list " +
+            "for only one merchant. Chose 'Show All' if you want to view pay list for every merchant.Click 'Create Single' " +
+            "if you want to create a new pay list for chosen merchant. " +
+            "Click 'Create All' and it will create pay lists for all the merchants";
 
     private static final String HEADER = "Pay List";
 
@@ -25,8 +25,8 @@ public class ChoiceTemplatePayList_ implements ChoiceTemplate {
         buttonsShow.add("Show All");
         buttonsShow.add("Show Single");
 
-        buttonsAdd.add("Update Single");
-        buttonsAdd.add("Update All");
+        buttonsAdd.add("Create Single");
+        buttonsAdd.add("Create All");
 
         resultHeaders.add("Id");
         resultHeaders.add("Merchant Id");
