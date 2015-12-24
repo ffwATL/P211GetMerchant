@@ -10,24 +10,12 @@
 			org.springframework.web.context.ContextLoaderListener
         </listener-class>
   </listener>
-  <servlet>
-    <description></description>
-    <display-name>Hello</display-name>
-    <servlet-name>Hello</servlet-name>
-    <servlet-class>com.bionic.edu.Hello</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Hello</servlet-name>
-    <url-pattern>/Hello</url-pattern>
-  </servlet-mapping>
-
-    <!--<error-page>
+    <error-page>
         <error-code>500</error-code>
         <location>/page_fail.jsp</location>
     </error-page>
-
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/page_fail.jsp</location>
-    </error-page>-->
+    </error-page>
 </web-app>

@@ -272,7 +272,7 @@ tr.green{
     width: 170px;
     margin-top: 2%;
     background-color: transparent;
-    position: fixed;
+    position: relative;
     float: left;
 }
 a.leftLink p{

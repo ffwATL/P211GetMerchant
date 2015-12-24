@@ -13,7 +13,7 @@
     if(param != null){
         if(param.equals("add new payment")){
             info += "Can't add a new payment to the DB. Merchant id: " +request.getParameter("merchant");
-            info+=", customer id: " +request.getParameter("customerId");
+            info+=", customer id: " + request.getParameter("customerId");
         }
     }
     %>
