@@ -33,7 +33,7 @@
         }
         boolean even = (choice.getButtonsAdd().size() + choice.getButtonsShow().size()) % 2 == 0;
     %>
-    <title><%out.print(choice.getHeader());%></title>
+    <title>Cash Manager</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
 </head>

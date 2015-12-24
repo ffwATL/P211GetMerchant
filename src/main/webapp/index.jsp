@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Home</title>
+    <title>Cash Manager</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
 </head>

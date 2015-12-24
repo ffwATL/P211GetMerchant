@@ -21,7 +21,7 @@
     }else response.sendRedirect("/page_fail.jsp?go=" + go);
 %>
 <head>
-    <title>CM</title>
+    <title>Cash Manager</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
     <meta http-equiv="refresh" content="5;url=choice.jsp?go=<%out.print(go);%>" />

@@ -91,7 +91,7 @@
     %>
     <link rel="shortcut icon" href="../../css/icon.png">
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
-    <title><%out.print(go);%></title>
+    <title>Cash Manager</title>
 </head>
 <body>
 <div class="container">

@@ -10,7 +10,7 @@
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
     %>
-    <title><%out.print(go);%></title>
+    <title>Cash Manager</title>
     <link rel="stylesheet" type="text/css" href="../../css/Style.css">
     <link rel="shortcut icon" href="../../css/icon.png">
 </head>
