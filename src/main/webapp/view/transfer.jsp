@@ -75,12 +75,12 @@
                     public String drawTable(List<PayList> list, String color){
                         StringBuilder builder = new StringBuilder();
                         for(PayList p: list){
-                            builder.append("<tr class=\""+color+"\"><td>" + p.getId() + "</td>");
-                            builder.append("<td>" + p.getMerchantId() + "</td>");
-                            builder.append("<td>" + p.getPeriod() + "</td>");
-                            builder.append("<td>" + p.getMinSum() + "</td>");
-                            builder.append("<td>" + p.getNeedToSend() + "</td>");
-                            builder.append("<td>" + p.getDt() + "</td></tr>");
+                            builder.append("<tr class=\"").append(color).append("\"><td>").append(p.getId()).append("</td>");
+                            builder.append("<td>").append(p.getMerchantId()).append("</td>");
+                            builder.append("<td>").append(p.getPeriod()).append("</td>");
+                            builder.append("<td>").append(p.getMinSum()).append("</td>");
+                            builder.append("<td>").append(p.getNeedToSend()).append("</td>");
+                            builder.append("<td>").append(p.getDt()).append("</td></tr>");
                         }
                         return builder.toString();
                     }
@@ -151,7 +151,7 @@
             </table>
         </div>
         <div class="footer">
-            <p id="home"><a href="/index.jsp">Home</a></p>
+            <p id="home"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></p>
         </div>
     </div>
 </div>

@@ -58,7 +58,7 @@
             </table>
         </div>
         <div class="footer">
-            <p id="home"><a href="/index.jsp">Home</a></p>
+            <p id="home"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></p>
         </div>
     </div>
 </div>

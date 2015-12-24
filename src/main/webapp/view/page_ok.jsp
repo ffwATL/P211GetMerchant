@@ -1,10 +1,6 @@
-<%@ page import="com.bionic.edu.merchant.Merchant" %>
-<%@ page import="com.bionic.edu.merchant.MerchantService" %>
-<%@ page import="com.bionic.edu.payment.Payment" %>
 <%@ page import="com.bionic.edu.payment.PaymentService" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%  ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
@@ -40,13 +36,14 @@
         </div>
         <div class="inner">
             <table class="input">
-                <td>
-                <td>
-                    <img class="operation" src="../../css/ok_green.ico"/>
-                </td>
-                <td>
-                    <p id="operation">OK</p>
-                </td>
+                <tr>
+                    <td>
+                    <td>
+                        <img class="operation" src="../../css/ok_green.ico"/>
+                    </td>
+                    <td>
+                        <p id="operation">OK</p>
+                    </td>
                 </tr>
             </table>
             <div class="info">
@@ -68,7 +65,7 @@
             </table>
         </div>
         <div class="footer">
-            <p id="home"><a href="/index.jsp">Home</a></p>
+            <p id="home"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></p>
         </div>
     </div>
 </div>

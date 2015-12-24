@@ -110,13 +110,15 @@
             <table class="list">
                 <tr>
                     <%
+                        if(choice!=null){
                             for (String s: choice.getResultHeaders()){
                                 out.println("<th>" + s + "</th>");
                             }
+                        }
                     %>
                 </tr>
                 <%
-                    if(go.equals("Pay List")){
+                    if(payListList != null && go.equals("Pay List")){
                         for(PayList p: payListList){
                             out.println("<tr class=\"show\"><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getMerchantId() + "</td>");
@@ -125,7 +127,7 @@
                             out.println("<td>" + p.getNeedToSend() + "</td>");
                             out.println("<td>" + p.getDt() + "</td></tr>");
                         }
-                    }else if(go.equals("Payment")){
+                    }else if(paymentList!=null && go.equals("Payment")){
                         for(Payment p: paymentList){
                             out.println("<tr class=\"show\"><td>" + p.getId() + "</td>");
                             out.println("<td>" + p.getDt() + "</td>");
@@ -151,7 +153,7 @@
                 <tr>
                     <form action="choice.jsp" method="get">
                         <td><input type="submit" value="Back"></td>
-                        <input type="hidden" value="<%out.print(choice.getHeader());%>" name="go">
+                        <input type="hidden" value="<%if(choice != null) out.print(choice.getHeader());%>" name="go">
                     </form>
                     <form action="<%if(go.equals("Pay List")) out.print("choice.jsp");
                         else out.print("/index.jsp");%>" method="get">
@@ -167,7 +169,7 @@
             </table>
         </div>
         <div class="footer">
-            <p id="home"><a href="/index.jsp">Home</a></p>
+            <p id="home"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></p>
         </div>
     </div>
 </div>
