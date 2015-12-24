@@ -3,6 +3,7 @@ package com.bionic.edu.merchant;
 import com.bionic.edu.payment.Payment;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +22,8 @@ public class Merchant {
     private double sent;
     private java.sql.Date lastSent;
 
-
 	@OneToMany(mappedBy = "merchant")
-	private List<Payment> payments;
+	private List<Payment> payments = new ArrayList<>();
 
     public Merchant(){}
 

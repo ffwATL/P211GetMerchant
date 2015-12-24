@@ -17,7 +17,7 @@ import java.util.List;
 
 @Named
 @Transactional(readOnly = true)
-public class PayListServiceImpl implements PayListService{
+public class PayListServiceImpl implements PayListService {
 
     private static Logger logger = LogManager.getLogger();
 
@@ -37,13 +37,17 @@ public class PayListServiceImpl implements PayListService{
                 p.setPeriod(m.getPeriod());
                 p.setNeedToSend(m.getNeedToSend());
                 p.setDt(new Date(System.currentTimeMillis()));
+                m.setLastSent(new Date(System.currentTimeMillis()));
+                m.setSent(m.getSent() + p.getNeedToSend());
+                m.setNeedToSend(0);
                 payListDao.addPayList(p);
             }
         }
     }
 
     @Override
-    public void add(int merchantId){
+    @Transactional
+    public void add(int merchantId) {
         Merchant m = merchantService.findById(merchantId);
         add(m);
     }
@@ -57,20 +61,20 @@ public class PayListServiceImpl implements PayListService{
     public List<PayList> findByMerchantId(int id) {
         try {
             return payListDao.findByMerchantId(id);
-        }catch (javax.persistence.NoResultException e){
+        } catch (javax.persistence.NoResultException e) {
             logger.error(e.getMessage());
             return null;
         }
     }
 
     @Override
-    public PayList findById(int id){
+    public PayList findById(int id) {
         return payListDao.findById(id);
     }
 
     @Override
     public void updateAll() {
-        merchantService.findAll().forEach(this :: add);
+        merchantService.findAll().forEach(this::add);
     }
 
     @Override
@@ -79,11 +83,11 @@ public class PayListServiceImpl implements PayListService{
     }
 
     @Override
-    public List<PayList> findFilteredUnpaid(int a){
+    public List<PayList> findFilteredUnpaid(int a) {
         List<PayList> list = findUnpaid();
-        if(a == 1) return list;
-        if(a == 2) Collections.sort(list);
-        else if(a == 3) {
+        if (a == 1) return list;
+        if (a == 2) Collections.sort(list);
+        else if (a == 3) {
             Collections.sort(list);
             Collections.reverse(list);
         }
@@ -92,14 +96,14 @@ public class PayListServiceImpl implements PayListService{
     }
 
     @Override
-    public List<List<PayList>> getGreenRedFiltered(List<PayList> payListList, double sum){
+    public List<List<PayList>> getGreenRedFiltered(List<PayList> payListList, double sum) {
         List<PayList> green = new LinkedList<>();
         List<PayList> red = new LinkedList<>();
         List<List<PayList>> result = new LinkedList<>();
         result.add(green);
         result.add(red);
-        for(PayList p: payListList){
-            if(sum >= p.getNeedToSend()){
+        for (PayList p : payListList) {
+            if (sum >= p.getNeedToSend()) {
                 green.add(p);
                 sum -= p.getNeedToSend();
             } else red.add(p);
@@ -107,20 +111,21 @@ public class PayListServiceImpl implements PayListService{
         return result;
     }
 
-    private void validateByPeriod(List<PayList> list){
-        for(int i=0; i < list.size(); i++){
+
+    private void validateByPeriod(List<PayList> list) {
+        for (int i = 0; i < list.size(); i++) {
             PayList p = list.get(i);
             Merchant m = merchantService.findById(p.getMerchantId());
-            if(m.getLastSent() != null){
-                if(!validatePeriod(m.getLastSent(), p.getPeriod())) list.remove(i);
+            if (m.getLastSent() != null) {
+                if (!validatePeriod(m.getLastSent(), p.getPeriod())) list.remove(i);
             }
         }
     }
 
-    private boolean validatePeriod(java.sql.Date lastSent, short period){
+    private boolean validatePeriod(java.sql.Date lastSent, short period) {
         LocalDate dt = LocalDate.now();
         LocalDate ls;
-        switch (period){
+        switch (period) {
             case 1:
                 ls = lastSent.toLocalDate().plusWeeks(1);
                 break;
@@ -130,7 +135,8 @@ public class PayListServiceImpl implements PayListService{
             case 3:
                 ls = lastSent.toLocalDate().plusMonths(1);
                 break;
-            default: return false;
+            default:
+                return false;
         }
         return dt.compareTo(ls) >= 0;
     }

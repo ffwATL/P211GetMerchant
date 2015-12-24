@@ -23,13 +23,13 @@ h3#header {
     color: #C4C4C4;;
 }
 hr {
-    margin-top: 16px;
+    margin-top: 36px;
     border: 0; height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0, 108, 140, 0.75), rgba(0,0,0,0));
-    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0, 108, 140, 0.75), rgba(0,0,0,0));
-    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0, 108, 140, 0.75), rgba(0,0,0,0));
-    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0, 108, 140, 0.75), rgba(0,0,0,0));
-    background-image: linear-gradient(left, rgba(0,0,0,0), rgba(0, 108, 140, 0.75), rgba(0,0,0,0));
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(77, 77, 89, 0.75), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(77, 77, 89, 0.75), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(77, 77, 89, 0.75), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(77, 77, 89, 0.75), rgba(0,0,0,0));
+    background-image: linear-gradient(left, rgba(0,0,0,0), rgba(77, 77, 89, 0.75), rgba(0,0,0,0));
     width:100%;
 }
 .button{
@@ -49,6 +49,7 @@ hr {
     border: none;
     border-radius: 2px;
     padding: 12px;
+    outline: none;
 }
 .button input:hover{
     transition: background .4s;
@@ -56,6 +57,9 @@ hr {
     cursor: pointer;
     border-radius: 2px;
     box-shadow: 0px 0px 30px #38ABBA;
+}
+.button input:active{
+    outline: none;
 }
 .container {
     overflow: visible;
@@ -95,6 +99,8 @@ hr {
     margin-top: 21px;
 }
 
+
+
 p#home a{
    /* margin-top: 10px;
     margin-bottom: 10px;*/
@@ -122,7 +128,7 @@ select {
     border: none;
     display: inline-block;
     -webkit-appearance:none;
-    -moz-webkit-appearance:none;
+    -moz-appearance:none;
     cursor:pointer;
     width: 180px;
 }
@@ -133,6 +139,7 @@ select#transfer{
     width: 140px;
     margin: 0;
 }
+
 input#sum{
     border-radius: 2px;
     width: 50px;
@@ -189,9 +196,11 @@ input[type="text"], input[type=number] {
 input#id {
     width: 40px;
 }
-input#price {
+input#price, #priceCalc {
     width: 70px;
 }
+
+
 
 input#goods {
     width: 200px;
@@ -201,6 +210,7 @@ input#goods {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 12px;
     vertical-align: middle;
 }
 .input th{
@@ -250,7 +260,7 @@ p#ok{
     color: #575454;
 }
 
-tr.red{
+tr.red, input#priceCalc{
     background-color: #EBDFDF;
 }
 tr.green{

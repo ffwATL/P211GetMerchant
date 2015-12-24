@@ -7,21 +7,22 @@ import java.util.List;
 
 public interface PayListService {
 
-    public void add(Merchant m);
+    void add(Merchant m);
 
-    public void add(int merchantId);
+    void add(int merchantId);
 
-    public List<PayList> findAll();
+    List<PayList> findAll();
 
-    public List<PayList> findByMerchantId(int id);
+    List<PayList> findByMerchantId(int id);
 
-    public PayList findById(int id);
+    PayList findById(int id);
 
-    public void updateAll();
+    void updateAll();
 
     List<PayList> findUnpaid();
 
-    public List<PayList> findFilteredUnpaid(int a);
+    List<PayList> findFilteredUnpaid(int a);
 
-    public List<List<PayList>> getGreenRedFiltered(List<PayList> payListList, double sum);
+    List<List<PayList>> getGreenRedFiltered(List<PayList> payListList, double sum);
+
 }

@@ -9,6 +9,4 @@ public interface MerchantService {
 
 	List<Merchant> findAll();
 
-    void updateNeedToSend(int id, double s);
-
 }

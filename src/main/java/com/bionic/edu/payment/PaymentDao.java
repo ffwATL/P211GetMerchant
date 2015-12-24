@@ -5,14 +5,12 @@ import java.util.List;
 
 public interface PaymentDao {
 
-    public List<Payment> findAll();
+    List<Payment> findAll();
 
-    public Payment findById(int id);
+    Payment findById(int id);
 
-    public void save(Payment p);
+    void save(Payment p);
 
-    public double getPaymentSum();
-
-    public List<Payment> findByMerchantId(int id);
+    List<Payment> findByMerchantId(int id);
 
 }

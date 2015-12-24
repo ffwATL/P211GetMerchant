@@ -8,6 +8,7 @@ import javax.inject.Named;
 import java.util.List;
 
 @Named
+@Transactional(readOnly = true)
 public class MerchantServiceImpl implements MerchantService{
 	
 	@Inject
@@ -21,12 +22,5 @@ public class MerchantServiceImpl implements MerchantService{
 	public List<Merchant> findAll() {
 		return merchantDao.findAll();
 	}
-
-    @Override
-    @Transactional
-    public void updateNeedToSend(int id, double s) {
-        Merchant m = findById(id);
-        m.setNeedToSend(m.getNeedToSend() + s - ((m.getCharge() * s) / 100));
-    }
 
 }

@@ -8,6 +8,7 @@ import javax.inject.Named;
 import java.util.List;
 
 @Named
+@Transactional(readOnly = true)
 public class CustomerServiceImpl implements CustomerService {
 
     @Inject

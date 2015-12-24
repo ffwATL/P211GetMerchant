@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Named
+@Transactional(readOnly = true)
 public class TransferServiceImpl implements TransferService{
     @Inject
     PayListService payListService;

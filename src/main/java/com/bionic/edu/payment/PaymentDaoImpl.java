@@ -17,7 +17,6 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @PersistenceContext
     private EntityManager em;
-    private static Logger logger = LogManager.getLogger();
 
     @Override
     public List<Payment> findAll() {
@@ -32,15 +31,9 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     @Override
-    public double getPaymentSum() {
-        TypedQuery<Double> query = em.createQuery("SELECT SUM(p.sumPayed) FROM Payment p", Double.class);
-        return query.getSingleResult();
-    }
-
-    @Override
     public List<Payment> findByMerchantId(int id) {
-        TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.merchant.id=" + id, Payment.class);
-        return query.getResultList();
+        return em.createQuery("SELECT p FROM Payment p WHERE p.merchant.id=:merchantId",
+                Payment.class).setParameter("merchantId",id).getResultList();
     }
 
     public Payment findById(int id) {

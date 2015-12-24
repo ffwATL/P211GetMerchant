@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -24,10 +25,6 @@ public class PayListDaoImpl implements PayListDao {
     @Override
     @Transactional
     public void addPayList(PayList p) {
-        Merchant m = em.find(Merchant.class, p.getMerchantId());
-        m.setLastSent(new Date(System.currentTimeMillis()));
-        m.setSent(m.getSent() + p.getNeedToSend());
-        m.setNeedToSend(0);
         em.persist(p);
     }
 
@@ -43,9 +40,9 @@ public class PayListDaoImpl implements PayListDao {
         try {
             return query.getResultList();
         }catch (javax.persistence.NoResultException e){
-            logger.trace(e.getMessage());
+            logger.error(e.getMessage());
         }
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

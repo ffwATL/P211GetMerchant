@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface CustomerDao {
 
-    public Customer findById(int id);
+    Customer findById(int id);
 
-    public List<Customer> findAll();
+    List<Customer> findAll();
 
-    public void save(Customer c);
+    void save(Customer c);
 
-    public void remove(int id);
+    void remove(int id);
 
-    public List<String> getNames(double sumPayed);
+    List<String> getNames(double sumPayed);
 
 }

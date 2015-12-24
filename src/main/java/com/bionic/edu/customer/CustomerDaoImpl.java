@@ -21,8 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> findAll() {
-        TypedQuery<Customer> tq = em.createQuery("SELECT c FROM Customer c", Customer.class);
-        return tq.getResultList();
+        return em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
     }
 
     @Transactional

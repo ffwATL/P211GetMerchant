@@ -9,6 +9,16 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%!
+    public double getTotal(List<PayList> list){
+        double sD = 0;
+        for(PayList p: list){
+            sD += p.getNeedToSend();
+        }
+        return sD;
+    }
+%>
+
 <%
     String go = request.getParameter("go");
     String choice = request.getParameter("choice");
@@ -86,7 +96,9 @@
                 %>
             </table>
             <div class="info">
-                <p>Enter the amount of money for further processing</p>
+                <%
+                    if(choice == null) out.print("<p>Enter the amount of money for further processing</p>");
+                %>
             </div>
             <table class="input">
                 <tr>
@@ -96,6 +108,14 @@
                     <td>
                         <input id="price" form="add" type="number" name="sum" value="<%if(sumString!=null) out.print(sumString);else out.print(1);%>" min="1"
                             <%if(choice != null && !choice.equals("Back")) out.print("disabled");%>>
+                    </td>
+                    <td>
+                        <p class="label">Required: </p>
+                    </td>
+                    <td>
+                        <%
+                            out.print("<input id=\"priceCalc\" type=\"number\" value=" +getTotal(payListList)+ " disabled>");
+                        %>
                     </td>
                     <%
                         if(choice == null || choice.equals("Back")){

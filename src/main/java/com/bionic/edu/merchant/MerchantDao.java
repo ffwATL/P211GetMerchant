@@ -8,6 +8,4 @@ public interface MerchantDao {
 
 	List<Merchant> findAll();
 
-    void updateMerchant(Merchant m);
-
 }

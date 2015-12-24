@@ -31,5 +31,4 @@ public class TransferDaoImpl implements TransferDao {
     public void save(TransferMoney tm) {
         em.persist(tm);
     }
-
 }

@@ -7,13 +7,11 @@ import com.bionic.edu.transfer.TransferMoney;
 import com.bionic.edu.transfer.TransferService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class Hello {
@@ -25,15 +23,26 @@ public class Hello {
     TransferService transferService;
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
-        Hello app = (Hello) context.getBean("hello");
+        /*ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
+        Hello app = (Hello) context.getBean("hello");*/
 
-        LocalDate dt = LocalDate.now();
+
+
+    /*    LocalDate dt = LocalDate.now();
         LocalDate dt2 = LocalDate.now();
-        /*dt.plusWeeks(2);*/
+        *//*dt.plusWeeks(2);*//*
         logger.trace(dt2.isAfter(dt));
-        logger.trace(dt2.compareTo(dt));
+        logger.trace(dt2.compareTo(dt));*/
         /*app.doTransfer(12);*/
+    }
+
+    private static Optional<Long> getLong(){
+        return Optional.ofNullable(getValue());
+    }
+
+
+    static Long getValue(){
+        return 6L;
     }
 
     private void showUnpayed(){

@@ -22,12 +22,6 @@ public class MerchantDaoImpl implements MerchantDao{
 		return em.createQuery("SELECT m FROM Merchant m", Merchant.class).getResultList();
 	}
 
-    @Override
-    @Transactional
-    public void updateMerchant(Merchant m){
-        em.merge(m);
-    }
-
 	@Override
 	public Merchant findById(int id){
 		return em.find(Merchant.class, id);
