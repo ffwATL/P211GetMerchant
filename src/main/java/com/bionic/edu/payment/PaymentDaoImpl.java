@@ -23,7 +23,6 @@ public class PaymentDaoImpl implements PaymentDao {
         return em.createQuery("SELECT p FROM Payment p", Payment.class).getResultList();
     }
 
-
     @Transactional
     @Override
     public void save(Payment p) {

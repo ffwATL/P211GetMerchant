@@ -2,15 +2,14 @@
 <%@ page import="com.bionic.edu.merchant.paylist.PayListService" %>
 <%@ page import="com.bionic.edu.payment.Payment" %>
 <%@ page import="com.bionic.edu.payment.PaymentService" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplate" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList_" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplateTransfer" %>
 <%@ page import="com.bionic.edu.transfer.TransferService" %>
 <%@ page import="com.bionic.edu.transfer.TransferMoney" %>
+<%@ page import="com.bionic.edu.util.*" %>
+<%@ page import="com.bionic.edu.merchant.Merchant" %>
+<%@ page import="com.bionic.edu.merchant.MerchantService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,11 +19,20 @@
         String choiceParam = request.getParameter("choice");
         List<PayList> payListList = null;
         List<Payment> paymentList = null;
+        List<Merchant> merchantList = null;
         List<TransferMoney> transferList = null;
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-config.xml");
         int id = 0;
         if(request.getParameter("merchant") != null) id = Integer.valueOf(request.getParameter("merchant"));
         switch (go) {
+            case "Merchant":{
+                choice = ChoiceTemplateMerchant.getInstance();
+                MerchantService merchantService = (MerchantService) context.getBean("merchantServiceImpl");
+                if(choiceParam!=null && choiceParam.equals("Show All")){
+                    merchantList = merchantService.findAll();
+                }
+                break;
+            }
             case "Payment":
                 choice = ChoiceTemplatePayments.getInstance();
                 if (choiceParam.equals("Add New")) {
@@ -47,7 +55,7 @@
                     case "Show Single":
                         payListList = payListService.findByMerchantId(id);
                         break;
-                    case "Update Single":
+                    case "Create Single":
                         payListService.add(id);
                         payListList = payListService.findByMerchantId(id);
                         break;
@@ -101,6 +109,7 @@
         </div>
         <div class="navside">
             <ul>
+                <li><a class="leftLink" href="choice.jsp?go=Merchant"><p>Merchant</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Payment"><p>Payments</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>
@@ -145,18 +154,29 @@
                             out.println("<td>" + tm.getSumSent() + "</td>");
                             out.println("<td>" + tm.getDt() + "</td></tr>");
                         }
+                    }else if(go.equals("Merchant") && merchantList!=null){
+                        for (Merchant m: merchantList){
+                            out.println("<tr class=\"show\"><td>" + m.getId() + "</td>");
+                            out.println("<td>" + m.getName() + "</td>");
+                            out.println("<td>" + m.getPeriod() + "</td>");
+                            out.println("<td>" + m.getMinSum() + "</td>");
+                            out.println("<td>" + m.getNeedToSend() + "</td>");
+                            out.println("<td>" + m.getCharge() + "</td>");
+                            out.println("<td>" + m.getSent() + "</td>");
+                            out.println("<td>" + m.getLastSent() + "</td>");
+                        }
                     }
                 %>
             </table>
             <hr>
             <table class="button">
                 <tr>
-                    <form action="choice.jsp" method="get">
+                    <form action="<%out.print(request.getHeader("referer"));%>" method="post">
                         <td><input type="submit" value="Back"></td>
                         <input type="hidden" value="<%if(choice != null) out.print(choice.getHeader());%>" name="go">
                     </form>
                     <form action="<%if(go.equals("Pay List") || go.equals("Payment")) out.print("choice.jsp");
-                        else out.print("/index.jsp");%>" method="get">
+                        else out.print("/index.jsp");%>" method="post">
                         <td id="center"><input <%if(go.equals("Pay List") || go.equals("Payment"))out.print("class=\"update\"");%>type="submit" value=
                         <%if(go.equals("Pay List") || go.equals("Payment"))out.print("Next"); else out.print("Home");%>></td>
                         <%

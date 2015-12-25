@@ -1,11 +1,8 @@
 <%@ page import="com.bionic.edu.merchant.Merchant" %>
 <%@ page import="com.bionic.edu.merchant.MerchantService" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplate" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayList_" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplatePayments" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="com.bionic.edu.util.ChoiceTemplateTransfer" %>
+<%@ page import="com.bionic.edu.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +20,9 @@
             case "Transfer Money":
             case "Money Transfer":
                 choice = ChoiceTemplateTransfer.getInstance();
+                break;
+            case "Merchant":
+                choice = ChoiceTemplateMerchant.getInstance();
                 break;
             case "Home":
                 response.sendRedirect("/index.jsp");
@@ -44,6 +44,7 @@
         <h3 id="header"><%if(choice != null) out.print(choice.getHeader());%></h3>
         <div class="navside">
             <ul>
+                <li><a class="leftLink" href="choice.jsp?go=Merchant"><p>Merchant</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Payment"><p>Payments</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>
@@ -56,13 +57,15 @@
             <table class="input">
                 <tr>
                     <td>
-                        <select form="one" name="merchant">
-                            <%
+                        <%
+                            if(!go.equals("Merchant")){
+                                out.print("<select form=\"one\" name=\"merchant\">");
                                 for (Merchant m: merchantService.findAll()){
                                     out.print("<option" + " value=" + m.getId() + ">" + m.getName() + "</option>");
                                 }
-                            %>
-                        </select>
+                                out.print("</select>");
+                            }
+                        %>
                     </td>
                 </tr>
             </table>

@@ -54,6 +54,7 @@
         <h3 id="header"><%if(choiceTransferTemplate != null) out.print(choiceTransferTemplate.getHeader());%></h3>
         <div class="navside">
             <ul>
+                <li><a class="leftLink" href="choice.jsp?go=Merchant"><p>Merchant</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Payment"><p>Payments</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Pay+List"><p>Pay List</p></a></li>
                 <li><a class="leftLink" href="choice.jsp?go=Transfer+Money"><p>Transfer Money</p></a></li>

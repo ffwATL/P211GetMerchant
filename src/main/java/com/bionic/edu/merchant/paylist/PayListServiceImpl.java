@@ -86,12 +86,12 @@ public class PayListServiceImpl implements PayListService {
     public List<PayList> findFilteredUnpaid(int a) {
         List<PayList> list = findUnpaid();
         if (a == 1) return list;
-        if (a == 2) Collections.sort(list);
+        else if (a == 2) Collections.sort(list);
         else if (a == 3) {
             Collections.sort(list);
             Collections.reverse(list);
         }
-        validateByPeriod(list);
+        /*validateByPeriod(list);*/
         return list;
     }
 
@@ -112,7 +112,7 @@ public class PayListServiceImpl implements PayListService {
     }
 
 
-    private void validateByPeriod(List<PayList> list) {
+   /* private void validateByPeriod(List<PayList> list) {
         for (int i = 0; i < list.size(); i++) {
             PayList p = list.get(i);
             Merchant m = merchantService.findById(p.getMerchantId());
@@ -120,7 +120,7 @@ public class PayListServiceImpl implements PayListService {
                 if (!validatePeriod(m.getLastSent(), p.getPeriod())) list.remove(i);
             }
         }
-    }
+    }*/
 
     private boolean validatePeriod(java.sql.Date lastSent, short period) {
         LocalDate dt = LocalDate.now();
